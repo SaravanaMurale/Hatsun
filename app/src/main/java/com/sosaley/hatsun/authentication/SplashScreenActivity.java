@@ -12,6 +12,10 @@ import com.sosaley.hatsun.R;
 public class SplashScreenActivity extends AppCompatActivity {
 
 
+    /*Gmail SignUp Working
+sosyhapiot@gmail.com
+sosyhapiot@123*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
