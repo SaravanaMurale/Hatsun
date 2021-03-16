@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "827441824089",
+    "project_id": "hapsosaley",
+    "storage_bucket": "hapsosaley.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827441824089:android:0df1ac2d77d0657a674c48",
+        "android_client_info": {
+          "package_name": "com.sosaley.hatsun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827441824089-6lnju1cqhoh02rudd4133temfl1o4lbe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsG-YXwbDf85h_B0_AmYPP3fqBoTd4Dec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827441824089-6lnju1cqhoh02rudd4133temfl1o4lbe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
