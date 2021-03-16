@@ -1,17 +1,17 @@
 package com.sosaley.hatsun.authentication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -61,6 +61,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View view) {
 
+                //sendPostRequest();
+
                 UserDTO userDTO=new UserDTO("Murali","9999999999","sara@gmail.com","aaaaaaaaaa");
 
 
@@ -75,11 +77,14 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
                         System.out.println("ResponseSuccess "+response.body());
 
+                        Toast.makeText(SignupActivity.this,"ResponseSuccess "+response.body(),Toast.LENGTH_LONG).show();
+
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         System.out.println("ExceptionMessage "+t.getMessage().toString());
+                        Toast.makeText(SignupActivity.this,"ExceptionMessage "+t.getMessage().toString(),Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -93,6 +98,82 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         signInButton.setOnClickListener(this);
 
     }
+
+   /* private void sendPostRequest() {
+
+        try {
+            class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+
+                @Override
+                protected String doInBackground(String... params) {
+
+                    String urlParameters = "192.168.0.61";
+
+                    HttpClient httpClient = new DefaultHttpClient();
+
+                    HttpPost httpPost = new HttpPost(urlParameters);
+                    List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
+                    nameValuePairList.add(new BasicNameValuePair("carnumber", pref.getString("BatteryLID", "").toString()));
+//                    nameValuePairList.add(new BasicNameValuePair("drivername", pref.getString("Driver Name", "").toString()));
+                    nameValuePairList.add(new BasicNameValuePair("timestamp", currentDateandTime));
+                    nameValuePairList.add(new BasicNameValuePair("livedata", pref.getString("Server values", "").toString()));
+                    nameValuePairList.add(new BasicNameValuePair("location", pref.getString("Latitude", "").toString() + ","
+                            + pref.getString("Longitude", "").toString()));
+
+                    Log.d("Cloud Datas", pref.getString("BatteryLID", "") + pref.getString("Driver Name", "").toString() + currentDateandTime + pref.getString("Server values", "") + pref.getString("Latitude", "") + pref.getString("Longitude", ""));
+
+                    try {
+                        UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairList);
+
+                        httpPost.setEntity(urlEncodedFormEntity);
+
+                        try {
+
+                            HttpResponse httpResponse = httpClient.execute(httpPost);
+                            InputStream inputStream = httpResponse.getEntity().getContent();
+
+                            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+
+                            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                            StringBuilder stringBuilder = new StringBuilder();
+
+                            String bufferedStrChunk = null;
+
+                            while ((bufferedStrChunk = bufferedReader.readLine()) != null) {
+                                stringBuilder.append(bufferedStrChunk);
+                            }
+
+                            return stringBuilder.toString();
+
+                        } catch (ClientProtocolException cpe) {
+                            cpe.printStackTrace();
+                        } catch (IOException ioe) {
+                            ioe.printStackTrace();
+                        }
+
+                    } catch (UnsupportedEncodingException uee) {
+                        uee.printStackTrace();
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String result) {
+                    super.onPostExecute(result);
+                }
+            }
+
+            SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+            sendPostReqAsyncTask.execute();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }*/
 
     private void launchOTPActivity() {
 
