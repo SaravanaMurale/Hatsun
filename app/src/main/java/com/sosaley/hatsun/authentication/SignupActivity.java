@@ -21,6 +21,14 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.sosaley.hatsun.R;
+import com.sosaley.hatsun.model.UserDTO;
+import com.sosaley.hatsun.retrofit.ApiClient;
+import com.sosaley.hatsun.retrofit.ApiInterface;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.sosaley.hatsun.utils.AppConstant.REQ_CODE;
 
@@ -53,8 +61,29 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View view) {
 
+                UserDTO userDTO=new UserDTO("Murali","9999999999","sara@gmail.com","aaaaaaaaaa");
 
-                launchOTPActivity();
+
+                ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+                //Call<ResponseBody> call =apiInterface.saveUserRegistration(userDTO);
+
+                Call<ResponseBody> call=apiInterface.saveUserRegistration(userDTO);
+
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                        System.out.println("ResponseSuccess "+response.body());
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        System.out.println("ExceptionMessage "+t.getMessage().toString());
+                    }
+                });
+
+                //launchOTPActivity();
 
 
             }
