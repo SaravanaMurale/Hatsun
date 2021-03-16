@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#232c65</color>
+    <color name="colorPrimaryDark">#232c65</color>
+    <color name="colorAccent">#232c65</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="light_black">#595a5c</color>
+    <color name="red">#F05154</color>
+    <color name="darkgreen">#008000</color>
+    <color name="green">#60b246</color>
+    <color name="lightBlue">#4a8cf6</color>
+    <color name="shimmer_bg">#dddddd</color>
+    <color name="gray">#a6a6a6</color>
+    <color name="gray_black">#666666</color>
+    <color name="bg_start">#414283</color>
+    <color name="bg_end">#24b6df</color>
+    <color name="signup_bg">#fcfcfc</color>
+    <color name="cyan">#C57842</color>
+    <color name="mildblue">#C8D7E5</color>
+    <color name="mildblue1">#E6EFF8</color>
+    <color name="textcolor">#E63E2A</color>
+    <color name="sun_atlantic_color">#003734</color>
+    <color name="menu_bg">#3a3a3c</color>
+    <color name="dark_gray">#a8a8a8</color>
+    <color name="hatsun_bg">#f1f2f2</color>
+    <color name="hatsun_blue">#232c65</color>
+</resources>

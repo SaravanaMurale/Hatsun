@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+
+        <Button
+            android:id="@+id/fbSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:paddingTop="@dimen/ten_dp"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_marginRight="@dimen/twenty_dp"
+            android:fontFamily="sans-serif-condensed"
+            android:paddingBottom="@dimen/ten_dp"
+            android:text="Signup with Facebook"
+            android:textColor="@color/white"
+            android:background="@color/hatsun_blue"
+            />
+
+       <!-- <com.shobhitpuri.custombuttons.GoogleSignInButton
+            android:id="@+id/gmailSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/fbSignup"
+            android:layout_marginBottom="@dimen/ten_dp"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_marginRight="@dimen/twenty_dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/continue_gamil"
+            android:gravity="center"
+            android:background="@color/red"
+
+            />-->
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/gmailSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/fbSignup"
+            android:layout_marginBottom="@dimen/ten_dp"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_marginRight="@dimen/twenty_dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/continue_gamil"
+            android:gravity="center"
+            android:background="@color/hatsun_blue"/>
+
+        <TextView
+            android:id="@+id/othersignin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/gmailSignup"
+            android:layout_centerHorizontal="true"
+            android:text="@string/other_singin"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_marginBottom="@dimen/five_dp"
+
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@id/gmailSignup"
+            android:layout_marginBottom="@dimen/thirteen_dp"
+            android:layout_toLeftOf="@id/othersignin"
+            android:background="@color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@id/gmailSignup"
+            android:layout_marginBottom="@dimen/thirteen_dp"
+            android:layout_toRightOf="@id/othersignin"
+            android:background="@color/black" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

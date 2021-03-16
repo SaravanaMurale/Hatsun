@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Hatsun</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="mobile">Mobile Number</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signin">Signin</string>
+    <string name="signup">Signup</string>
+    <string name="continue_gamil">Continue with Gmail</string>
+    <string name="continue_fb">Continue with Facebook</string>
+    <string name="other_singin">Other Signin</string>
+    <string name="otp_sent">Verification code sent to </string>
+    <string name="resend">Resend OTP?</string>
+    <string name="dont_account">Dont Have An Account?</string>
+    <string name="forget_password">Forget Password?</string>
+
+
+    <string name="client_name">Client Name</string>
+    <string name="plant_name">Plant Name</string>
+    <string name="battery_no">Battery Room #</string>
+    <string name="ups_no">UPS #</string>
+    <string name="race_id">Ract ID #</string>
+    <string name="slave_id">Slave ID #</string>
+    <string name="slave_type">Slave Type</string>
+
+    <string name="sosaley">Sosaley Technologies Private Limited</string>
+</resources>
