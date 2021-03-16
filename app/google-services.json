@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "827441824089",
-    "project_id": "hapsosaley",
-    "storage_bucket": "hapsosaley.appspot.com"
+    "project_number": "401191697738",
+    "project_id": "hapsosaley-a5bf4",
+    "storage_bucket": "hapsosaley-a5bf4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:827441824089:android:0df1ac2d77d0657a674c48",
+        "mobilesdk_app_id": "1:401191697738:android:f75f5a4e94ace52e74d5b3",
         "android_client_info": {
           "package_name": "com.sosaley.hatsun"
         }
       },
       "oauth_client": [
         {
-          "client_id": "827441824089-6lnju1cqhoh02rudd4133temfl1o4lbe.apps.googleusercontent.com",
+          "client_id": "401191697738-co8iibk74gc1d5bkuqsfm78h89p8pecf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCsG-YXwbDf85h_B0_AmYPP3fqBoTd4Dec"
+          "current_key": "AIzaSyCO8mfNicwN9tuynkk4J8zBjTpBU-wPqNA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "827441824089-6lnju1cqhoh02rudd4133temfl1o4lbe.apps.googleusercontent.com",
+              "client_id": "401191697738-co8iibk74gc1d5bkuqsfm78h89p8pecf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

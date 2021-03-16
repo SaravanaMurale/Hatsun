@@ -8,6 +8,115 @@
     tools:context=".authentication.SignupActivity">
 
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:src="@drawable/hatsun_agro_pro_logo"
+        android:layout_centerHorizontal="true" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signupNameBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="@dimen/thirty_dp"
+        android:layout_marginRight="@dimen/thirty_dp">
+
+        <EditText
+            android:id="@+id/signupName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_name"
+            android:gravity="left"
+            android:inputType="text"
+            android:fontFamily="sans-serif-condensed"
+            android:drawableRight="@drawable/person_icon"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signupMobileBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signupNameBlock"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:layout_marginLeft="@dimen/thirty_dp"
+        android:layout_marginRight="@dimen/thirty_dp">
+
+        <EditText
+            android:id="@+id/signupMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/mobile"
+            android:gravity="left"
+            android:fontFamily="sans-serif-condensed"
+            android:drawableRight="@drawable/mobile_icon"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signupEmailBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signupMobileBlock"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:layout_marginLeft="@dimen/thirty_dp"
+        android:layout_marginRight="@dimen/thirty_dp">
+
+        <EditText
+            android:id="@+id/signupEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:gravity="left"
+            android:fontFamily="sans-serif-condensed"
+            android:drawableRight="@drawable/email_icon"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signupPasswordBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signupEmailBlock"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:layout_marginLeft="@dimen/thirty_dp"
+        android:layout_marginRight="@dimen/thirty_dp"
+        app:passwordToggleEnabled="true"
+        >
+
+        <EditText
+            android:id="@+id/signupPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:gravity="left"
+            android:fontFamily="sans-serif-condensed"
+            android:inputType="textPassword"
+
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signup"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_below="@id/signupPasswordBlock"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/thirty_dp"
+        android:background="@drawable/background_shape"
+        />
+
+
     <include layout="@layout/fragment_social_signup"/>
 
 

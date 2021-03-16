@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,6 +29,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     GoogleSignInClient mGoogleSignInClient;
     SignInButton signInButton;
 
+    Button signUpBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         signInButton=(SignInButton)findViewById(R.id.gmailSignup);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+        signUpBtn=(Button)findViewById(R.id.signUpBtn);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 
@@ -43,8 +49,27 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         //updateUI(account);
 
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                launchOTPActivity();
+
+
+            }
+        });
+
+
         signInButton.setOnClickListener(this);
 
+    }
+
+    private void launchOTPActivity() {
+
+        Intent intent=new Intent(SignupActivity.this,OTPActivity.class);
+        intent.putExtra("MOBILE","+919123521374");
+        startActivity(intent);
     }
 
     @Override
@@ -96,6 +121,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 String personEmail = acct.getEmail();
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
+
+                Toast.makeText(SignupActivity.this,"NameAndEmail "+personName+" "+personEmail,Toast.LENGTH_LONG).show();
 
                 System.out.println("NameAndEmail "+personName+" "+personEmail);
                 
