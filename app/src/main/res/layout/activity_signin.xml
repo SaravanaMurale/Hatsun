@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".authentication.SigninActivity">
+
+
+    <ImageView
+        android:id="@+id/signInLogo"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/cow"
+        />
+
+    <RelativeLayout
+        android:id="@+id/singInBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signInLogo"
+        android:layout_marginTop="@dimen/twenty_dp"
+        >
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signinMobileBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginLeft="@dimen/thirty_dp"
+            android:layout_marginRight="@dimen/thirty_dp">
+
+            <EditText
+                android:id="@+id/signupMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/mobile"
+                android:gravity="left"
+                android:drawableRight="@drawable/mobile_icon"
+                android:maxLength="10"
+                android:fontFamily="sans-serif-condensed"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signinPasswordBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signinMobileBlock"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginLeft="@dimen/thirty_dp"
+            android:layout_marginRight="@dimen/thirty_dp"
+            app:passwordToggleEnabled="true"
+            >
+
+            <EditText
+                android:id="@+id/signupPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="left"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/signInBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signin"
+        android:layout_marginLeft="@dimen/thirty_dp"
+        android:layout_marginRight="@dimen/thirty_dp"
+        android:layout_below="@id/singInBlock"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/thirty_dp"
+        android:fontFamily="sans-serif-condensed"
+        android:background="@drawable/background_shape"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dont_account"
+        android:layout_below="@id/signInBtn"
+        android:layout_marginTop="17dp"
+        android:layout_toLeftOf="@id/signInSignUp"
+        android:layout_marginRight="@dimen/five_dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif-condensed"
+        />
+
+    <TextView
+        android:id="@+id/signInSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup"
+        android:layout_below="@id/signInBtn"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/thirty_dp"
+        android:layout_marginTop="@dimen/fifteen_dp"
+        android:textColor="@color/hatsun_blue"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/signInForgetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forget_password"
+        android:layout_below="@id/signInBtn"
+        android:layout_marginTop="17dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="@dimen/thirty_dp"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif-condensed"
+        />
+
+
+    <include layout="@layout/layout_bottom"/>
+
+
+</RelativeLayout>

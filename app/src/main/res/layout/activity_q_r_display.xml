@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".menu.QRDisplayActivity">
+
+    <Button
+        android:id="@+id/btnScanQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/fifty_dp"
+        android:text="Scan QR"
+        android:background="@drawable/background_shape"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnScanQR"
+        android:layout_marginTop="@dimen/five_dp"
+        android:text="Click scanQR to scan QR code "
+        android:layout_centerHorizontal="true"
+        />
+
+    <RelativeLayout
+        android:id="@+id/qrDisplayBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/hundren_dp"
+        android:visibility="invisible"
+        >
+
+        <RelativeLayout
+            android:id="@+id/clientNameBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginRight="@dimen/five_dp"
+
+            >
+
+        <TextView
+            android:id="@+id/clientNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/client_name"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/clientName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Hutsan Agro Products"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/plantNameBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/clientNameBlock"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginRight="@dimen/five_dp"
+            android:layout_marginTop="@dimen/five_dp"
+            >
+
+        <TextView
+            android:id="@+id/plantNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/plant_name"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/plantName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Plant Name"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/batteryBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/plantNameBlock"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginRight="@dimen/five_dp"
+            android:layout_marginTop="@dimen/five_dp"
+            >
+
+        <TextView
+            android:id="@+id/batteryTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/battery_no"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/battery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="3"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/upsBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/batteryBlock"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginRight="@dimen/five_dp"
+            android:layout_marginTop="@dimen/five_dp"
+            >
+        <TextView
+            android:id="@+id/upsTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/ups_no"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/ups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="3"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rackBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/upsBlock"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginRight="@dimen/five_dp"
+            android:layout_marginTop="@dimen/five_dp"
+            >
+        <TextView
+            android:id="@+id/rackTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/race_id"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/rack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="3"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/slaveIdBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rackBlock"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginRight="@dimen/five_dp"
+            android:layout_marginTop="@dimen/five_dp"
+            >
+
+        <TextView
+            android:id="@+id/slaveTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/slave_id"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/slave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="3"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/slaveTypeBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/slaveIdBlock"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginRight="@dimen/five_dp"
+            android:layout_marginTop="@dimen/five_dp">
+
+        <TextView
+            android:id="@+id/slaveTypeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/slave_type"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/slaveType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="3"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/displayQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnScanQR" />
+
+    <Button
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/qrDisplayBlock"
+        android:layout_marginTop="@dimen/twenty_five_sp"
+        android:text="Edit"
+        android:background="@drawable/background_shape"
+        android:layout_marginLeft="@dimen/five_dp"
+        android:visibility="invisible"
+
+        />
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/qrDisplayBlock"
+        android:layout_marginTop="@dimen/twenty_five_sp"
+        android:text="Update"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/background_shape"
+        android:visibility="invisible"
+
+        />
+
+    <Button
+        android:id="@+id/sync"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/qrDisplayBlock"
+        android:layout_marginTop="@dimen/twenty_five_sp"
+        android:text="Sync"
+        android:background="@drawable/background_shape"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/five_dp"
+        android:visibility="invisible"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sosaley"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+
+        />
+
+
+</RelativeLayout>

@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sosaley.hatsun">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,13 +16,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
        <!-- <activity android:name=".authentication.SignupActivity"></activity>-->
-        <activity android:name=".authentication.SignupActivity">
+
+        <activity android:name="com.sosaley.hatsun.menu.QRDisplayActivity"></activity>
+        <!-- <activity android:name=".register.SplashScreenActivity"></activity> -->
+        <activity android:name="com.sosaley.hatsun.menu.QRScannerActivity" />
+        <activity android:name="com.sosaley.hatsun.authentication.SignupActivity" />
+        <activity android:name="com.sosaley.hatsun.authentication.SigninActivity" />
+
+
+        <activity android:name=".authentication.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
     </application>
 
 </manifest>

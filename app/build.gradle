@@ -33,4 +33,10 @@ dependencies {
     //Google SignIn Button
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
+    //Material Design
+    implementation 'com.google.android.material:material:1.0.0'
+
+    //Barcode scanner
+    implementation 'me.dm7.barcodescanner:zxing:1.9'
+
 }
