@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sosaley.hatsun.R;
 import com.sosaley.hatsun.menu.QRDisplayActivity;
+import com.sosaley.hatsun.utils.ToastUtil;
 
 
 public class SigninActivity extends AppCompatActivity {
@@ -31,6 +32,8 @@ public class SigninActivity extends AppCompatActivity {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 Intent intent=new Intent(SigninActivity.this, QRDisplayActivity.class);
                 startActivity(intent);
 

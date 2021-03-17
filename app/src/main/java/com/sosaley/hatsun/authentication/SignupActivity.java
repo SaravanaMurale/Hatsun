@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,8 @@ import com.sosaley.hatsun.R;
 import com.sosaley.hatsun.model.UserDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
+import com.sosaley.hatsun.utils.ToastUtil;
+import com.sosaley.hatsun.utils.Validation;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -39,15 +42,20 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     Button signUpBtn;
 
+    EditText userName,userMobileNumber,userEmail,userPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        signInButton=(SignInButton)findViewById(R.id.gmailSignup);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
 
-        signUpBtn=(Button)findViewById(R.id.signUpBtn);
+        initView();
+
+
+        signInButton=(SignInButton)findViewById(R.id.gmailSignup);
+
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 
@@ -63,30 +71,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
                 //sendPostRequest();
 
-                UserDTO userDTO=new UserDTO("Murali","9999999999","sara@gmail.com","aaaaaaaaaa");
+                validateUserDetails();
 
-
-                ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
-                //Call<ResponseBody> call =apiInterface.saveUserRegistration(userDTO);
-
-                Call<ResponseBody> call=apiInterface.saveUserRegistration(userDTO);
-
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                        System.out.println("ResponseSuccess "+response.body());
-
-                        Toast.makeText(SignupActivity.this,"ResponseSuccess "+response.body(),Toast.LENGTH_LONG).show();
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        System.out.println("ExceptionMessage "+t.getMessage().toString());
-                        Toast.makeText(SignupActivity.this,"ExceptionMessage "+t.getMessage().toString(),Toast.LENGTH_LONG).show();
-                    }
-                });
 
                 //launchOTPActivity();
 
@@ -99,81 +85,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-   /* private void sendPostRequest() {
-
-        try {
-            class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
-
-                @Override
-                protected String doInBackground(String... params) {
-
-                    String urlParameters = "192.168.0.61";
-
-                    HttpClient httpClient = new DefaultHttpClient();
-
-                    HttpPost httpPost = new HttpPost(urlParameters);
-                    List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
-                    nameValuePairList.add(new BasicNameValuePair("carnumber", pref.getString("BatteryLID", "").toString()));
-//                    nameValuePairList.add(new BasicNameValuePair("drivername", pref.getString("Driver Name", "").toString()));
-                    nameValuePairList.add(new BasicNameValuePair("timestamp", currentDateandTime));
-                    nameValuePairList.add(new BasicNameValuePair("livedata", pref.getString("Server values", "").toString()));
-                    nameValuePairList.add(new BasicNameValuePair("location", pref.getString("Latitude", "").toString() + ","
-                            + pref.getString("Longitude", "").toString()));
-
-                    Log.d("Cloud Datas", pref.getString("BatteryLID", "") + pref.getString("Driver Name", "").toString() + currentDateandTime + pref.getString("Server values", "") + pref.getString("Latitude", "") + pref.getString("Longitude", ""));
-
-                    try {
-                        UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairList);
-
-                        httpPost.setEntity(urlEncodedFormEntity);
-
-                        try {
-
-                            HttpResponse httpResponse = httpClient.execute(httpPost);
-                            InputStream inputStream = httpResponse.getEntity().getContent();
-
-                            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-
-                            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                            StringBuilder stringBuilder = new StringBuilder();
-
-                            String bufferedStrChunk = null;
-
-                            while ((bufferedStrChunk = bufferedReader.readLine()) != null) {
-                                stringBuilder.append(bufferedStrChunk);
-                            }
-
-                            return stringBuilder.toString();
-
-                        } catch (ClientProtocolException cpe) {
-                            cpe.printStackTrace();
-                        } catch (IOException ioe) {
-                            ioe.printStackTrace();
-                        }
-
-                    } catch (UnsupportedEncodingException uee) {
-                        uee.printStackTrace();
-                    }
-
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(String result) {
-                    super.onPostExecute(result);
-                }
-            }
-
-            SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
-            sendPostReqAsyncTask.execute();
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-    }*/
 
     private void launchOTPActivity() {
 
@@ -273,6 +187,80 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
                     }
                 });
+
+    }
+
+    private void validateUserDetails() {
+
+        String signupName=userName.getText().toString();
+        String signupMobile=userMobileNumber.getText().toString();
+        String signupEmail=userEmail.getText().toString();
+        String signupPassword=userPassword.getText().toString();
+
+        if(!Validation.validateName(signupName)){
+            ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_name));
+            return;
+        }
+        if(!Validation.validateMobileNumber(signupMobile)){
+            ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_mobile));
+            return;
+        }
+
+        if(!Validation.validateEmail(signupEmail)){
+            ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_email));
+            return;
+        }
+
+        if(!Validation.validatePassword(signupPassword)){
+            ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_password));
+            return;
+        }
+
+        if(Validation.validateName(signupName) && Validation.validateMobileNumber(signupMobile) && Validation.validateEmail(signupEmail) && Validation.validatePassword(signupPassword) ){
+            doSaveInServer(signupName,signupMobile,signupEmail,signupPassword);
+        }
+
+
+
+    }
+
+    private void doSaveInServer(String signupName, String signupMobile, String signupEmail, String signupPassword) {
+
+        UserDTO userDTO=new UserDTO(signupName,signupMobile,signupEmail,signupPassword);
+
+        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+
+        Call<ResponseBody> call=apiInterface.saveUserRegistration(userDTO);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                System.out.println("ResponseSuccess "+response.body());
+
+                Toast.makeText(SignupActivity.this,"ResponseSuccess "+response.body(),Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("ExceptionMessage "+t.getMessage().toString());
+                Toast.makeText(SignupActivity.this,"ExceptionMessage "+t.getMessage().toString(),Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+
+
+    private void initView() {
+        userName=(EditText)findViewById(R.id.signupName);
+        userMobileNumber=(EditText)findViewById(R.id.signupMobile);
+        userEmail=(EditText)findViewById(R.id.signupEmail);
+        userPassword=(EditText)findViewById(R.id.signupPassword);
+        signUpBtn=(Button)findViewById(R.id.signUpBtn);
+
+
 
     }
 

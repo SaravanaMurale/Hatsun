@@ -24,4 +24,12 @@
     <string name="slave_type">Slave Type</string>
 
     <string name="sosaley">Sosaley Technologies Private Limited</string>
+
+    <string name="forget_password_text">Enter Mobile Number</string>
+
+
+    <string name="valid_name">Name is too short</string>
+    <string name="valid_mobile">Mobile number should be in 10 digit</string>
+    <string name="valid_email">Please Enter Valid Email Address</string>
+    <string name="valid_password">Password should have minimum 6 characters</string>
 </resources>
