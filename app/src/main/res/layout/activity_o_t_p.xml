@@ -15,7 +15,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textColor="@color/hatsun_blue"
-        android:layout_marginTop="@dimen/twenty_dp"
+        android:layout_marginTop="@dimen/thirty_dp"
         android:textSize="@dimen/twenty_dp"
         />
 
@@ -25,6 +25,7 @@
         android:layout_height="@dimen/one_fifty_dp"
         android:src="@drawable/otp_icon"
         android:layout_below="@id/first"
+        android:layout_marginTop="@dimen/twenty_dp"
         android:layout_centerHorizontal="true"
         />
 
@@ -71,7 +72,7 @@
         android:textSize="@dimen/twenty_dp"
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/twenty_dp"
-        android:enabled="false"
+        android:visibility="invisible"
         />
 
 </RelativeLayout>

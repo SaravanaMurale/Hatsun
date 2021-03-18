@@ -72,8 +72,21 @@ public class OTPActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showTimer.setVisibility(View.VISIBLE);
-                otpResend.setEnabled(false);
+                otpResend.setVisibility(View.INVISIBLE);
                 countDownTimerAtForgetPassword();
+
+                otpResend.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        countDownTimerAtForgetPassword();
+
+
+                        showTimer.setVisibility(View.VISIBLE);
+
+                        //sendVerificationCode();
+                    }
+                });
             }
         });
 
@@ -206,21 +219,10 @@ public class OTPActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
 
-                otpResend.setEnabled(true);
+                otpResend.setVisibility(View.VISIBLE);
                 showTimer.setVisibility(View.INVISIBLE);
 
-                otpResend.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                        countDownTimerAtForgetPassword();
-
-                        otpResend.setVisibility(View.INVISIBLE);
-                        showTimer.setVisibility(View.VISIBLE);
-
-                        //sendVerificationCode();
-                    }
-                });
 
                 Toast.makeText(OTPActivity.this,"Timer Is Completed",Toast.LENGTH_LONG).show();
 
