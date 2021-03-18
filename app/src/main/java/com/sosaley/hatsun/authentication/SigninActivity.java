@@ -1,16 +1,17 @@
 package com.sosaley.hatsun.authentication;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sosaley.hatsun.R;
 import com.sosaley.hatsun.menu.QRDisplayActivity;
-import com.sosaley.hatsun.utils.ToastUtil;
 
 
 public class SigninActivity extends AppCompatActivity {
@@ -52,16 +53,36 @@ public class SigninActivity extends AppCompatActivity {
         signInForgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchForgetPasswordActivity();
+                launchForgetPasswordDialog();
             }
         });
 
     }
 
-    private void launchForgetPasswordActivity() {
+    private void launchForgetPasswordDialog() {
+
+        EditText editTextForgetPassword;
+        Button submitForget,cancelForget;
+
+        AlertDialog.Builder mBuilder=new AlertDialog.Builder(SigninActivity.this);
+        View mView=getLayoutInflater().inflate(R.layout.layout_forget_password,null);
+
+        editTextForgetPassword = (EditText) mView.findViewById(R.id.forgetPasswordMobile);
+        submitForget=(Button)mView.findViewById(R.id.submitForgetPass);
+        cancelForget=(Button)mView.findViewById(R.id.cancelforgetPass);
+
+        String forgetPasswordMobileNumber=editTextForgetPassword.getText().toString();
+        submitForget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
+            }
+        });
 
+        mBuilder.setView(mView);
+        AlertDialog alertDialog=mBuilder.create();
+        alertDialog.show();
     }
 
     private void launchSignUpActivity() {

@@ -9,10 +9,12 @@
     <string name="continue_gamil">Continue with Gmail</string>
     <string name="continue_fb">Continue with Facebook</string>
     <string name="other_singin">Other Signin</string>
-    <string name="otp_sent">Verification code sent to </string>
+    <string name="otp_sent">Verification code has been sent to </string>
     <string name="resend">Resend OTP?</string>
     <string name="dont_account">Dont Have An Account?</string>
     <string name="forget_password">Forget Password?</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
 
 
     <string name="client_name">Client Name</string>

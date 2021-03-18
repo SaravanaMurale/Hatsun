@@ -8,10 +8,25 @@
     tools:context=".authentication.OTPActivity">
 
     <TextView
+        android:id="@+id/first"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/otp_sent"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/hatsun_blue"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:textSize="@dimen/twenty_dp"
+        />
+
+    <ImageView
+        android:id="@+id/second"
+        android:layout_width="@dimen/one_fifty_dp"
+        android:layout_height="@dimen/one_fifty_dp"
+        android:src="@drawable/otp_icon"
+        android:layout_below="@id/first"
+        android:layout_centerHorizontal="true"
+        />
 
 
 
@@ -23,9 +38,10 @@
         app:width="40dp"
         app:bar_enabled="true"
         app:bar_height="5dp"
+        android:layout_below="@id/second"
         app:length="6"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/hundren_dp"
+        android:layout_marginTop="@dimen/twenty_dp"
         app:box_margin="@dimen/ten_dp"
         app:otp_text_size="24dp"/>
 
@@ -35,7 +51,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/otpTextView"
         android:text="1:00"
-        android:layout_margin="@dimen/five_dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="@dimen/twenty_dp"
+        android:layout_marginLeft="@dimen/thirty_dp"
+        android:layout_marginTop="@dimen/twenty_dp"
+
         />
 
     <TextView
@@ -45,8 +66,12 @@
         android:text="@string/resend"
         android:layout_below="@id/otpTextView"
         android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/five_dp"
-        android:visibility="invisible"
+        android:layout_marginRight="@dimen/thirty_dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/twenty_dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:enabled="false"
         />
 
 </RelativeLayout>

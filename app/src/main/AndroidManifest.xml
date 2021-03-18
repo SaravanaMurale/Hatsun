@@ -11,7 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".authentication.ForgetPassword"></activity>
         <activity android:name=".authentication.OTPActivity" /> <!-- <activity android:name=".authentication.SignupActivity"></activity> -->
         <activity android:name=".menu.QRDisplayActivity" /> <!-- <activity android:name=".register.SplashScreenActivity"></activity> -->
         <activity android:name=".menu.QRScannerActivity" />

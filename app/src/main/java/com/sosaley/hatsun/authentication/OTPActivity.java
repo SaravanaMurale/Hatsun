@@ -68,6 +68,15 @@ public class OTPActivity extends AppCompatActivity {
 
         countDownTimerAtForgetPassword();
 
+        otpResend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimer.setVisibility(View.VISIBLE);
+                otpResend.setEnabled(false);
+                countDownTimerAtForgetPassword();
+            }
+        });
+
         smsVerifyCatcher = new SmsVerifyCatcher(this, new OnSmsCatchListener<String>() {
             @Override
             public void onSmsCatch(String message) {
@@ -197,7 +206,7 @@ public class OTPActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
 
-                otpResend.setVisibility(View.VISIBLE);
+                otpResend.setEnabled(true);
                 showTimer.setVisibility(View.INVISIBLE);
 
                 otpResend.setOnClickListener(new View.OnClickListener() {
