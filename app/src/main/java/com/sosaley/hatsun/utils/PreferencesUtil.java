@@ -10,6 +10,7 @@ public class PreferencesUtil {
 
     //Shared Preference Name For Whole App
     private static final String SHARED_PREF_NAME = "hatsun";
+    public static final String USER_ID="user_id";
 
 
     public static void setValueString(Context context, String key, String value) {
