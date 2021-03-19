@@ -146,16 +146,20 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
-                Toast.makeText(SignupActivity.this,"NameAndEmail "+personName+" "+personEmail,Toast.LENGTH_LONG).show();
+                if(personName!=null && personEmail!=null){
+                    sendNamdAndGmailToServer(personName,personEmail);
+                }
+
+               // Toast.makeText(SignupActivity.this,"NameAndEmail "+personName+" "+personEmail,Toast.LENGTH_LONG).show();
 
                 System.out.println("NameAndEmail "+personName+" "+personEmail);
                 
-                new Handler().postDelayed(new Runnable() {
+                /*new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         signOut();
                     }
-                },3000);
+                },3000);*/
 
             }
 
@@ -172,6 +176,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         }
     }
+
+
 
     private void signOut() {
 
@@ -231,6 +237,28 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    private void sendNamdAndGmailToServer(String personName, String personEmail) {
+
+        UserDTO gmailUserDTO=new UserDTO(personName,personEmail);
+        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+
+        Call<ResponseBody> call=apiInterface.saveGmailUser(gmailUserDTO);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+
     private void doSaveInServer(String signupName, String signupMobile, String signupEmail, String signupPassword) {
 
         UserDTO userDTO=new UserDTO(signupName,signupMobile,signupEmail,signupPassword);
@@ -266,9 +294,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         userEmail=(EditText)findViewById(R.id.signupEmail);
         userPassword=(EditText)findViewById(R.id.signupPassword);
         signUpBtn=(Button)findViewById(R.id.signUpBtn);
-
-
-
     }
 
 }

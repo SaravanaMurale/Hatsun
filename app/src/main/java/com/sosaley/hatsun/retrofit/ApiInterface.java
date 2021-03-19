@@ -14,5 +14,14 @@ public interface ApiInterface {
     @POST(AppConstant.DOMAIN+"/saveuser")
     Call<ResponseBody> saveUserRegistration(@Body UserDTO userDTO);
 
+    @POST(AppConstant.DOMAIN+"/")
+    Call<ResponseBody> saveGmailUser(@Body UserDTO userDTO);
+
+    @POST(AppConstant.DOMAIN+"/")
+    Call<ResponseBody> saveFBUser(@Body UserDTO userDTO);
+
+    @POST(AppConstant.DOMAIN+"/")
+    Call<ResponseBody> sendForgetPasswordMobileNum();
+
 
 }

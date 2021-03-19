@@ -222,8 +222,6 @@ public class OTPActivity extends AppCompatActivity {
                 otpResend.setVisibility(View.VISIBLE);
                 showTimer.setVisibility(View.INVISIBLE);
 
-
-
                 Toast.makeText(OTPActivity.this,"Timer Is Completed",Toast.LENGTH_LONG).show();
 
             }

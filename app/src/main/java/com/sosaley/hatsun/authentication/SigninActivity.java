@@ -71,11 +71,14 @@ public class SigninActivity extends AppCompatActivity {
         submitForget=(Button)mView.findViewById(R.id.submitForgetPass);
         cancelForget=(Button)mView.findViewById(R.id.cancelforgetPass);
 
-        String forgetPasswordMobileNumber=editTextForgetPassword.getText().toString();
+        final String forgetPasswordMobileNumber=editTextForgetPassword.getText().toString();
         submitForget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                if(forgetPasswordMobileNumber!=null){
+                    sendMobileNumberToServer(forgetPasswordMobileNumber);
+                }
 
             }
         });
@@ -83,6 +86,12 @@ public class SigninActivity extends AppCompatActivity {
         mBuilder.setView(mView);
         AlertDialog alertDialog=mBuilder.create();
         alertDialog.show();
+    }
+
+    private void sendMobileNumberToServer(String forgetPasswordMobileNumber) {
+
+
+
     }
 
     private void launchSignUpActivity() {

@@ -13,6 +13,11 @@ public class UserDTO {
     @SerializedName("password")
     private String password;
 
+    public UserDTO(String userName, String email) {
+        this.userName = userName;
+        this.email = email;
+    }
+
     public UserDTO(String userName, String userMobile, String email, String password) {
         this.userName = userName;
         this.userMobile = userMobile;
