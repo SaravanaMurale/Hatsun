@@ -4,6 +4,7 @@
     <string name="mobile">Mobile Number</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="signin">Signin</string>
     <string name="signup">Signup</string>
     <string name="continue_gamil">Continue with Gmail</string>
@@ -34,4 +35,7 @@
     <string name="valid_mobile">Mobile number should be in 10 digit</string>
     <string name="valid_email">Please Enter Valid Email Address</string>
     <string name="valid_password">Password should have minimum 6 characters</string>
+
+    <string name="enter_password">Please Enter Password</string>
+    <string name="enter_confirm_password">Please Enter Confirm Password</string>
 </resources>

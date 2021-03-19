@@ -146,6 +146,15 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
+                if(!Validation.validateName(personName)){
+                    ToastUtil.showShortToast(SignupActivity.this,getString( R.string.valid_name));
+                    return;
+                }
+                if(!Validation.validateEmail(personEmail)){
+                    ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_email));
+                    return;
+                }
+
                 if(personName!=null && personEmail!=null){
                     sendNamdAndGmailToServer(personName,personEmail);
                 }
@@ -203,7 +212,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         String signupEmail=userEmail.getText().toString();
         String signupPassword=userPassword.getText().toString();
 
-        /*if(!Validation.validateName(signupName)){
+        if(!Validation.validateName(signupName)){
             ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_name));
             return;
         }
@@ -220,20 +229,20 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if(!Validation.validatePassword(signupPassword)){
             ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_password));
             return;
-        }*/
+        }
 
-       // if(Validation.validateName(signupName) && Validation.validateMobileNumber(signupMobile) && Validation.validateEmail(signupEmail) && Validation.validatePassword(signupPassword) ){
-            //doSaveInServer(signupName,signupMobile,signupEmail,signupPassword);
+        if(Validation.validateName(signupName) && Validation.validateMobileNumber(signupMobile) && Validation.validateEmail(signupEmail) && Validation.validatePassword(signupPassword) ) {
+            doSaveInServer(signupName, signupMobile, signupEmail, signupPassword);
 
-            UserDTO userDTO=new UserDTO("Murali","9123521374","sara@gmail.com","aaaaaaaa");
+           /* UserDTO userDTO=new UserDTO("Murali","9123521374","sara@gmail.com","aaaaaaaa");
 
             Intent intent=new Intent(SignupActivity.this,OTPActivity.class);
             intent.putExtra("MOBILE","9123521374");
-            startActivity(intent);
+            startActivity(intent);*/
 
-       // }
+            // }
 
-
+        }
 
     }
 
@@ -247,10 +256,19 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+                ResponseBody responseBody=response.body();
+
+                if(response.isSuccessful()){
+
+                }
+
+
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                System.out.println("ExceptionMessage "+t.getMessage().toString());
 
             }
         });
@@ -297,3 +315,4 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 }
+
