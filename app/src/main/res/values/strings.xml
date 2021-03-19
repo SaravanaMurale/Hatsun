@@ -18,6 +18,9 @@
     <string name="cancel">Cancel</string>
 
 
+
+
+
     <string name="client_name">Client Name</string>
     <string name="plant_name">Plant Name</string>
     <string name="battery_no">Battery Room #</string>
@@ -27,10 +30,9 @@
     <string name="slave_type">Slave Type</string>
 
     <string name="sosaley">Sosaley Technologies Private Limited</string>
+    <string name="w3sos">www.sosaley.in</string>
 
     <string name="forget_password_text">Enter Mobile Number</string>
-
-
     <string name="valid_name">Name is too short</string>
     <string name="valid_mobile">Mobile number should be in 10 digit</string>
     <string name="valid_email">Please Enter Valid Email Address</string>

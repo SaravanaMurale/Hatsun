@@ -1,7 +1,6 @@
 package com.sosaley.hatsun.authentication;
 
 import android.app.AlertDialog;
-import android.app.Presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;

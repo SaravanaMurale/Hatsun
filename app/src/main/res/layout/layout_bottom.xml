@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sosaley Technologies Private Limited"
+        android:text="@string/sosaley"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:textColor="@color/black"
@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="www.sosaley.in"
+        android:text="@string/w3sos"
         android:textColor="@color/black"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
