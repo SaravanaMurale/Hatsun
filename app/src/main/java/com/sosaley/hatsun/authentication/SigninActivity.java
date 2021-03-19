@@ -95,10 +95,6 @@ public class SigninActivity extends AppCompatActivity {
                     Intent intent=new Intent(SigninActivity.this,QRDisplayActivity.class);
                     startActivity(intent);
                 }
-
-
-
-
             }
 
             @Override

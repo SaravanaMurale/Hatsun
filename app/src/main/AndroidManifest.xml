@@ -13,11 +13,11 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".authentication.ResetPasswordActivity"></activity>
         <activity android:name=".authentication.OTPActivity" /> <!-- <activity android:name=".authentication.SignupActivity"></activity> -->
-        <activity android:name=".menu.QRDisplayActivity" /> <!-- <activity android:name=".register.SplashScreenActivity"></activity> -->
+        <!--<activity android:name=".menu.QRDisplayActivity" />--> <!-- <activity android:name=".register.SplashScreenActivity"></activity> -->
         <activity android:name=".menu.QRScannerActivity" />
         <activity android:name=".authentication.SignupActivity" />
         <activity android:name=".authentication.SigninActivity" />
-        <activity android:name=".authentication.SplashScreenActivity">
+        <activity android:name=".menu.QRDisplayActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

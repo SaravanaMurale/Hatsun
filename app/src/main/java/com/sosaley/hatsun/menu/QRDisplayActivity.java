@@ -56,6 +56,13 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         slaveNo = (TextView) findViewById(R.id.slave);
         slaveType = (TextView) findViewById(R.id.slaveType);
 
+        sync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                syncScannedDataWithServer();
+            }
+        });
+
 
         btnScanQR.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +90,16 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                 popupMenu.show();
             }
         });
+    }
+
+    private void syncScannedDataWithServer() {
+
+        String client_Name=clientName.getText().toString();
+
+        System.out.println("ClientNameInQRDisplay"+client_Name);
+
+
+
     }
 
     private void callActivity() {
