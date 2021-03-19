@@ -1,6 +1,7 @@
 package com.sosaley.hatsun.retrofit;
 
 import com.sosaley.hatsun.model.BaseDTO;
+import com.sosaley.hatsun.model.ResetPasswordDTO;
 import com.sosaley.hatsun.model.UserDTO;
 import com.sosaley.hatsun.utils.AppConstant;
 
@@ -25,7 +26,7 @@ public interface ApiInterface {
     Call<BaseDTO> sendForgetPasswordMobileNum(@Body UserDTO userDTO);
 
     @POST(AppConstant.DOMAIN+"/")
-    Call<BaseDTO> resetPassword(@Body UserDTO userDTO)
+    Call<BaseDTO> resetPassword(@Body ResetPasswordDTO resetPasswordDTO);
 
 
 }

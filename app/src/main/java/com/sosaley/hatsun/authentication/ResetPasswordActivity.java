@@ -10,7 +10,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.sosaley.hatsun.R;
+import com.sosaley.hatsun.menu.QRDisplayActivity;
+import com.sosaley.hatsun.model.BaseDTO;
+import com.sosaley.hatsun.model.ResetPasswordDTO;
+import com.sosaley.hatsun.retrofit.ApiClient;
+import com.sosaley.hatsun.retrofit.ApiInterface;
 import com.sosaley.hatsun.utils.ToastUtil;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.sosaley.hatsun.utils.Validation.validatePassword;
 
@@ -86,7 +96,42 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     private void resetPasswordInServer(String set_password) {
 
+        ResetPasswordDTO resetPasswordDTO=new ResetPasswordDTO(resetMobileNum,set_password);
 
+        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+
+        Call<BaseDTO> call=apiInterface.resetPassword(resetPasswordDTO);
+
+        call.enqueue(new Callback<BaseDTO>() {
+            @Override
+            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+
+                BaseDTO baseDTO=response.body();
+
+                if(baseDTO.getResponseCode().equals("200")){
+                    launchMenuActivity();
+                }else {
+                    Toast.makeText(ResetPasswordActivity.this,"NetworkIssue",Toast.LENGTH_LONG).show();
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseDTO> call, Throwable t) {
+
+            }
+        });
+
+
+
+    }
+
+    private void launchMenuActivity() {
+
+        Intent intent=new Intent(ResetPasswordActivity.this, SigninActivity.class);
+        startActivity(intent);
 
     }
 }
