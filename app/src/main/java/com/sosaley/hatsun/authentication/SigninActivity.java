@@ -1,6 +1,7 @@
 package com.sosaley.hatsun.authentication;
 
 import android.app.AlertDialog;
+import android.app.Presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,9 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sosaley.hatsun.R;
 import com.sosaley.hatsun.menu.QRDisplayActivity;
 import com.sosaley.hatsun.model.BaseDTO;
+import com.sosaley.hatsun.model.LoginDTO;
 import com.sosaley.hatsun.model.UserDTO;
+import com.sosaley.hatsun.model.UserResponseDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
+import com.sosaley.hatsun.utils.PreferencesUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +36,8 @@ public class SigninActivity extends AppCompatActivity {
     String forgetPasswordMobileNumber;
     EditText editTextForgetPassword;
 
+    EditText loginMobileEditText,loginPasswordEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +46,16 @@ public class SigninActivity extends AppCompatActivity {
         signInSignUp = (TextView) findViewById(R.id.signInSignUp);
         signInForgetPassword = (TextView) findViewById(R.id.signInForgetPassword);
 
+        loginMobileEditText=(EditText)findViewById(R.id.signupMobile);
+        loginPasswordEditText=(EditText)findViewById(R.id.signupPassword);
+
         signInBtn = (Button) findViewById(R.id.signInBtn);
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-                Intent intent = new Intent(SigninActivity.this, QRDisplayActivity.class);
-                startActivity(intent);
+                doLoginUser(loginMobileEditText.getText().toString(),loginPasswordEditText.getText().toString());
 
 
             }
@@ -67,6 +74,39 @@ public class SigninActivity extends AppCompatActivity {
                 launchForgetPasswordDialog();
             }
         });
+
+    }
+
+    private void doLoginUser(String loginMobile, String loginPassword) {
+
+        LoginDTO loginDTO=new LoginDTO(loginMobile,loginPassword);
+
+        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+
+        Call<UserResponseDTO> call=apiInterface.getLoginUserDetails(loginDTO);
+        call.enqueue(new Callback<UserResponseDTO>() {
+            @Override
+            public void onResponse(Call<UserResponseDTO> call, Response<UserResponseDTO> response) {
+
+                UserResponseDTO userResponseDTO=response.body();
+
+                if(userResponseDTO.getResponseCode().equals("200")){
+                    PreferencesUtil.setValueSInt(SigninActivity.this,PreferencesUtil.USER_ID,userResponseDTO.getUserId());
+                    Intent intent=new Intent(SigninActivity.this,QRDisplayActivity.class);
+                    startActivity(intent);
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<UserResponseDTO> call, Throwable t) {
+
+            }
+        });
+
 
     }
 
