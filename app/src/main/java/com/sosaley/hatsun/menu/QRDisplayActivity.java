@@ -3,8 +3,6 @@ package com.sosaley.hatsun.menu;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -114,6 +112,8 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         switch (menuItem.getItemId()) {
             case R.id.item1:
                 Toast.makeText(QRDisplayActivity.this, "Profile", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(QRDisplayActivity.this,ProfileActivity.class);
+                startActivity(intent);
                 return true;
 
             case R.id.item2:
