@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class BaseDTO {
 
-    @SerializedName("Response Code")
+    @SerializedName("responsecode")
     private String responseCode;
 
     public void setResponseCode(String responseCode) {

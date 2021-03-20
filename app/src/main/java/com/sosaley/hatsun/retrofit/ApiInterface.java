@@ -18,8 +18,8 @@ public interface ApiInterface {
     @POST(AppConstant.DOMAIN+"/getuser")
     Call<UserResponseDTO> getLoginUserDetails(@Body LoginDTO loginDTO);
 
-    @POST(AppConstant.DOMAIN+"/saveuser")
-    Call<ResponseBody> saveUserRegistration(@Body UserDTO userDTO);
+    @POST(AppConstant.DOMAIN+"/savenormaluser")
+    Call<UserResponseDTO> saveUserRegistration(@Body UserDTO userDTO);
 
     @POST(AppConstant.DOMAIN+"/")
     Call<ResponseBody> saveGmailUser(@Body UserDTO userDTO);
@@ -30,7 +30,7 @@ public interface ApiInterface {
     @POST(AppConstant.DOMAIN+"/forgetpassword")
     Call<BaseDTO> sendForgetPasswordMobileNum(@Body UserDTO userDTO);
 
-    @POST(AppConstant.DOMAIN+"/")
+    @POST(AppConstant.DOMAIN+"/resetpassword")
     Call<BaseDTO> resetPassword(@Body ResetPasswordDTO resetPasswordDTO);
 
 

@@ -23,8 +23,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.sosaley.hatsun.R;
 import com.sosaley.hatsun.model.UserDTO;
+import com.sosaley.hatsun.model.UserResponseDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
+import com.sosaley.hatsun.utils.PreferencesUtil;
 import com.sosaley.hatsun.utils.ToastUtil;
 import com.sosaley.hatsun.utils.Validation;
 
@@ -212,7 +214,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         String signupEmail=userEmail.getText().toString();
         String signupPassword=userPassword.getText().toString();
 
-        if(!Validation.validateName(signupName)){
+        /*if(!Validation.validateName(signupName)){
             ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_name));
             return;
         }
@@ -229,20 +231,21 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if(!Validation.validatePassword(signupPassword)){
             ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_password));
             return;
-        }
+        }*/
 
-        if(Validation.validateName(signupName) && Validation.validateMobileNumber(signupMobile) && Validation.validateEmail(signupEmail) && Validation.validatePassword(signupPassword) ) {
+        /*if(Validation.validateName(signupName) && Validation.validateMobileNumber(signupMobile) && Validation.validateEmail(signupEmail) && Validation.validatePassword(signupPassword) ) {
             doSaveInServer(signupName, signupMobile, signupEmail, signupPassword);
 
-           /* UserDTO userDTO=new UserDTO("Murali","9123521374","sara@gmail.com","aaaaaaaa");
+        }*/
+
+
+        doSaveInServer("Murali", "8123521374", "sarav@gmail.com", "aaaaaaaa");
+
+        /* UserDTO userDTO=new UserDTO("Murali","9123521374","sara@gmail.com","aaaaaaaa");
 
             Intent intent=new Intent(SignupActivity.this,OTPActivity.class);
             intent.putExtra("MOBILE","9123521374");
             startActivity(intent);*/
-
-            // }
-
-        }
 
     }
 
@@ -279,24 +282,40 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     private void doSaveInServer(String signupName, String signupMobile, String signupEmail, String signupPassword) {
 
-        UserDTO userDTO=new UserDTO(signupName,signupMobile,signupEmail,signupPassword);
+        final UserDTO userDTO=new UserDTO(signupName,signupMobile,signupEmail,signupPassword);
 
         ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
 
-        Call<ResponseBody> call=apiInterface.saveUserRegistration(userDTO);
+        Call<UserResponseDTO> call=apiInterface.saveUserRegistration(userDTO);
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<UserResponseDTO>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<UserResponseDTO> call, Response<UserResponseDTO> response) {
+
+                UserResponseDTO userResponseDTO=response.body();
+
+                if(userResponseDTO.getResponseCode().equals("700")){
+                    System.out.println("UserAlreadyExists");
+                }else if(userResponseDTO.getResponseCode().equals("200")){
+                    System.out.println("ValueInserted");
+
+                    PreferencesUtil.setValueSInt(SignupActivity.this,PreferencesUtil.USER_ID,userResponseDTO.getUserId());
+
+                    System.out.println("ValueSaved");
+
+                }
+
+                /*System.out.println("ReceivedData "+userResponseDTO.getResponseCode()+" "+userResponseDTO.getUserId()+" "+userResponseDTO.getUserEmail()+" "+userName);
+
 
                 System.out.println("ResponseSuccess "+response.body());
 
-                Toast.makeText(SignupActivity.this,"ResponseSuccess "+response.body(),Toast.LENGTH_LONG).show();
+                Toast.makeText(SignupActivity.this,"ResponseSuccess "+response.body(),Toast.LENGTH_LONG).show();*/
 
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<UserResponseDTO> call, Throwable t) {
                 System.out.println("ExceptionMessage "+t.getMessage().toString());
                 Toast.makeText(SignupActivity.this,"ExceptionMessage "+t.getMessage().toString(),Toast.LENGTH_LONG).show();
             }

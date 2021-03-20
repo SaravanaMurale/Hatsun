@@ -18,8 +18,8 @@
         <!-- <activity android:name=".register.SplashScreenActivity"></activity> -->
         <activity android:name=".menu.QRScannerActivity" />
         <activity android:name=".authentication.SignupActivity" />
-        <activity android:name=".authentication.SigninActivity" />
-        <activity android:name=".menu.QRDisplayActivity">
+        <!--<activity android:name=".authentication.SigninActivity" />-->
+        <activity android:name=".authentication.SigninActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
