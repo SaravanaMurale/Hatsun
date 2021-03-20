@@ -21,8 +21,8 @@ public interface ApiInterface {
     @POST(AppConstant.DOMAIN+"/savenormaluser")
     Call<UserResponseDTO> saveUserRegistration(@Body UserDTO userDTO);
 
-    @POST(AppConstant.DOMAIN+"/")
-    Call<ResponseBody> saveGmailUser(@Body UserDTO userDTO);
+    @POST(AppConstant.DOMAIN+"/savegmailuser")
+    Call<UserResponseDTO> saveGmailUser(@Body UserDTO userDTO);
 
     @POST(AppConstant.DOMAIN+"/")
     Call<ResponseBody> saveFBUser(@Body UserDTO userDTO);

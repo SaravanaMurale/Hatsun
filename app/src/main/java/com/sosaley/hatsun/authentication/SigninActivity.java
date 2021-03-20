@@ -20,6 +20,7 @@ import com.sosaley.hatsun.model.UserResponseDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
 import com.sosaley.hatsun.utils.PreferencesUtil;
+import com.sosaley.hatsun.utils.ToastUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,8 +92,14 @@ public class SigninActivity extends AppCompatActivity {
 
                 if(userResponseDTO.getResponseCode().equals("200")){
                     PreferencesUtil.setValueSInt(SigninActivity.this,PreferencesUtil.USER_ID,userResponseDTO.getUserId());
-                    Intent intent=new Intent(SigninActivity.this,QRDisplayActivity.class);
-                    startActivity(intent);
+
+                    launchHomeActivity();
+
+
+                }else if(userResponseDTO.getResponseCode().equals("500")){
+                    ToastUtil.showShortToast(SigninActivity.this,"You are not registerd,Please signup");
+                }else if(userResponseDTO.getResponseCode().equals("700")){
+                    ToastUtil.showShortToast(SigninActivity.this,"You have entered wrong username or password");
                 }
             }
 
@@ -102,6 +109,13 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void launchHomeActivity() {
+        Intent intent=new Intent(SigninActivity.this,QRDisplayActivity.class);
+        startActivity(intent);
+        finish();
 
     }
 

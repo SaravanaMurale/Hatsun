@@ -22,6 +22,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.sosaley.hatsun.R;
+import com.sosaley.hatsun.menu.QRDisplayActivity;
 import com.sosaley.hatsun.model.UserDTO;
 import com.sosaley.hatsun.model.UserResponseDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
@@ -29,6 +30,8 @@ import com.sosaley.hatsun.retrofit.ApiInterface;
 import com.sosaley.hatsun.utils.PreferencesUtil;
 import com.sosaley.hatsun.utils.ToastUtil;
 import com.sosaley.hatsun.utils.Validation;
+
+import java.util.logging.Level;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -44,7 +47,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     Button signUpBtn;
 
-    EditText userName,userMobileNumber,userEmail,userPassword;
+    EditText userName, userMobileNumber, userEmail, userPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         initView();
 
 
-        signInButton=(SignInButton)findViewById(R.id.gmailSignup);
+        signInButton = (SignInButton) findViewById(R.id.gmailSignup);
 
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
@@ -88,20 +91,17 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-
-
-
     private void launchOTPActivity() {
 
-        Intent intent=new Intent(SignupActivity.this,OTPActivity.class);
-        intent.putExtra("MOBILE","+919123521374");
+        Intent intent = new Intent(SignupActivity.this, OTPActivity.class);
+        intent.putExtra("MOBILE", "+919123521374");
         startActivity(intent);
     }
 
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
             case R.id.gmailSignup:
                 signIn();
@@ -148,22 +148,22 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
-                if(!Validation.validateName(personName)){
-                    ToastUtil.showShortToast(SignupActivity.this,getString( R.string.valid_name));
+                if (!Validation.validateName(personName)) {
+                    ToastUtil.showShortToast(SignupActivity.this, getString(R.string.valid_name));
                     return;
                 }
-                if(!Validation.validateEmail(personEmail)){
-                    ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_email));
+                if (!Validation.validateEmail(personEmail)) {
+                    ToastUtil.showShortToast(SignupActivity.this, getString(R.string.valid_email));
                     return;
                 }
 
-                if(personName!=null && personEmail!=null){
-                    sendNamdAndGmailToServer(personName,personEmail);
+                if (personName != null && personEmail != null) {
+                    sendNamdAndGmailToServer(personName, personEmail);
                 }
 
-               // Toast.makeText(SignupActivity.this,"NameAndEmail "+personName+" "+personEmail,Toast.LENGTH_LONG).show();
+                // Toast.makeText(SignupActivity.this,"NameAndEmail "+personName+" "+personEmail,Toast.LENGTH_LONG).show();
 
-                System.out.println("NameAndEmail "+personName+" "+personEmail);
+                System.out.println("NameAndEmail " + personName + " " + personEmail);
                 
                 /*new Handler().postDelayed(new Runnable() {
                     @Override
@@ -180,14 +180,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-           // Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            // Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             //updateUI(null);
 
-            System.out.println("SignInResultFailedCode "+e.getStatusCode());
+            System.out.println("SignInResultFailedCode " + e.getStatusCode());
 
         }
     }
-
 
 
     private void signOut() {
@@ -197,7 +196,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             System.out.println("SuccessfullyLogout");
                         }
 
@@ -209,10 +208,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     private void validateUserDetails() {
 
-        String signupName=userName.getText().toString();
-        String signupMobile=userMobileNumber.getText().toString();
-        String signupEmail=userEmail.getText().toString();
-        String signupPassword=userPassword.getText().toString();
+        String signupName = userName.getText().toString();
+        String signupMobile = userMobileNumber.getText().toString();
+        String signupEmail = userEmail.getText().toString();
+        String signupPassword = userPassword.getText().toString();
 
         /*if(!Validation.validateName(signupName)){
             ToastUtil.showShortToast(SignupActivity.this,getString(R.string.valid_name));
@@ -251,27 +250,33 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     private void sendNamdAndGmailToServer(String personName, String personEmail) {
 
-        UserDTO gmailUserDTO=new UserDTO(personName,personEmail);
+        UserDTO gmailUserDTO = new UserDTO(personName, personEmail);
         ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
 
-        Call<ResponseBody> call=apiInterface.saveGmailUser(gmailUserDTO);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<UserResponseDTO> call = apiInterface.saveGmailUser(gmailUserDTO);
+        call.enqueue(new Callback<UserResponseDTO>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<UserResponseDTO> call, Response<UserResponseDTO> response) {
 
-                ResponseBody responseBody=response.body();
+                UserResponseDTO userResponseDTO = response.body();
 
-                if(response.isSuccessful()){
+                if (userResponseDTO.getResponseCode().equals("200")) {
 
+                    System.out.println("ValueInserted");
+                    PreferencesUtil.setValueSInt(SignupActivity.this, PreferencesUtil.USER_ID, userResponseDTO.getUserId());
+                    launchHomeScreen();
+
+                } else if (userResponseDTO.getResponseCode().equals("700")) {
+                    System.out.println("DataIsMissing");
                 }
 
 
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<UserResponseDTO> call, Throwable t) {
 
-                System.out.println("ExceptionMessage "+t.getMessage().toString());
+                System.out.println("ExceptionMessage " + t.getMessage().toString());
 
             }
         });
@@ -282,26 +287,27 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     private void doSaveInServer(String signupName, String signupMobile, String signupEmail, String signupPassword) {
 
-        final UserDTO userDTO=new UserDTO(signupName,signupMobile,signupEmail,signupPassword);
+        final UserDTO userDTO = new UserDTO(signupName, signupMobile, signupEmail, signupPassword);
 
         ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
 
-        Call<UserResponseDTO> call=apiInterface.saveUserRegistration(userDTO);
+        Call<UserResponseDTO> call = apiInterface.saveUserRegistration(userDTO);
 
         call.enqueue(new Callback<UserResponseDTO>() {
             @Override
             public void onResponse(Call<UserResponseDTO> call, Response<UserResponseDTO> response) {
 
-                UserResponseDTO userResponseDTO=response.body();
+                UserResponseDTO userResponseDTO = response.body();
 
-                if(userResponseDTO.getResponseCode().equals("700")){
-                    System.out.println("UserAlreadyExists");
-                }else if(userResponseDTO.getResponseCode().equals("200")){
+                if (userResponseDTO.getResponseCode().equals("700")) {
+                    ToastUtil.showLongToast(SignupActivity.this, "Your Already Register User,Please Signin");
+                } else if (userResponseDTO.getResponseCode().equals("200")) {
                     System.out.println("ValueInserted");
 
-                    PreferencesUtil.setValueSInt(SignupActivity.this,PreferencesUtil.USER_ID,userResponseDTO.getUserId());
+                    PreferencesUtil.setValueSInt(SignupActivity.this, PreferencesUtil.USER_ID, userResponseDTO.getUserId());
 
-                    System.out.println("ValueSaved");
+                    launchHomeScreen();
+
 
                 }
 
@@ -316,21 +322,29 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onFailure(Call<UserResponseDTO> call, Throwable t) {
-                System.out.println("ExceptionMessage "+t.getMessage().toString());
-                Toast.makeText(SignupActivity.this,"ExceptionMessage "+t.getMessage().toString(),Toast.LENGTH_LONG).show();
+                System.out.println("ExceptionMessage " + t.getMessage().toString());
+                Toast.makeText(SignupActivity.this, "ExceptionMessage " + t.getMessage().toString(), Toast.LENGTH_LONG).show();
             }
         });
 
 
     }
 
+    private void launchHomeScreen() {
+
+        Intent intent = new Intent(SignupActivity.this, QRDisplayActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
 
     private void initView() {
-        userName=(EditText)findViewById(R.id.signupName);
-        userMobileNumber=(EditText)findViewById(R.id.signupMobile);
-        userEmail=(EditText)findViewById(R.id.signupEmail);
-        userPassword=(EditText)findViewById(R.id.signupPassword);
-        signUpBtn=(Button)findViewById(R.id.signUpBtn);
+        userName = (EditText) findViewById(R.id.signupName);
+        userMobileNumber = (EditText) findViewById(R.id.signupMobile);
+        userEmail = (EditText) findViewById(R.id.signupEmail);
+        userPassword = (EditText) findViewById(R.id.signupPassword);
+        signUpBtn = (Button) findViewById(R.id.signUpBtn);
     }
 
 }
