@@ -15,8 +15,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sosaley.hatsun.R;
+import com.sosaley.hatsun.authentication.SigninActivity;
 import com.sosaley.hatsun.utils.AppConstant;
 import com.sosaley.hatsun.utils.PermissionUtils;
+import com.sosaley.hatsun.utils.PreferencesUtil;
 
 
 public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -117,7 +119,11 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                 return true;
 
             case R.id.item2:
-                Toast.makeText(QRDisplayActivity.this, "Logout", Toast.LENGTH_LONG).show();
+                PreferencesUtil.clearAll(QRDisplayActivity.this);
+                Intent signin=new Intent(QRDisplayActivity.this, SigninActivity.class);
+                startActivity(signin);
+                finish();
+                //Toast.makeText(QRDisplayActivity.this, "Logout", Toast.LENGTH_LONG).show();
                 return true;
 
             default:

@@ -13,6 +13,7 @@ import com.sosaley.hatsun.R;
 import com.sosaley.hatsun.menu.QRDisplayActivity;
 import com.sosaley.hatsun.model.BaseDTO;
 import com.sosaley.hatsun.model.ResetPasswordDTO;
+import com.sosaley.hatsun.model.UserResponseDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
 import com.sosaley.hatsun.utils.ToastUtil;
@@ -100,17 +101,19 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
 
-        Call<BaseDTO> call=apiInterface.resetPassword(resetPasswordDTO);
+        Call<UserResponseDTO> call=apiInterface.resetPassword(resetPasswordDTO);
 
-        call.enqueue(new Callback<BaseDTO>() {
+        call.enqueue(new Callback<UserResponseDTO>() {
             @Override
-            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+            public void onResponse(Call<UserResponseDTO> call, Response<UserResponseDTO> response) {
 
-                BaseDTO baseDTO=response.body();
+                UserResponseDTO userResponseDTO=response.body();
 
-                if(baseDTO.getResponseCode().equals("200")){
-                    launchMenuActivity();
-                }else {
+                if(userResponseDTO.getResponseCode().equals("200")){
+
+                    launchHomeScreen();
+
+                }else if(userResponseDTO.getResponseCode().equals("500")) {
                     Toast.makeText(ResetPasswordActivity.this,"NetworkIssue",Toast.LENGTH_LONG).show();
                 }
 
@@ -119,7 +122,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<BaseDTO> call, Throwable t) {
+            public void onFailure(Call<UserResponseDTO> call, Throwable t) {
 
             }
         });
@@ -128,10 +131,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     }
 
-    private void launchMenuActivity() {
-
+    private void launchHomeScreen() {
         Intent intent=new Intent(ResetPasswordActivity.this, SigninActivity.class);
         startActivity(intent);
+        finish();
 
     }
+
+
 }

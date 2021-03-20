@@ -31,7 +31,7 @@ public interface ApiInterface {
     Call<BaseDTO> sendForgetPasswordMobileNum(@Body UserDTO userDTO);
 
     @POST(AppConstant.DOMAIN+"/resetpassword")
-    Call<BaseDTO> resetPassword(@Body ResetPasswordDTO resetPasswordDTO);
+    Call<UserResponseDTO> resetPassword(@Body ResetPasswordDTO resetPasswordDTO);
 
 
 }
