@@ -37,6 +37,8 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_q_r_display);
 
+
+
         btnScanQR = (Button) findViewById(R.id.btnScanQR);
         displayQR = (TextView) findViewById(R.id.displayQR);
 
@@ -93,6 +95,9 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
     }
 
     private void syncScannedDataWithServer() {
+
+
+
 
         String client_Name=clientName.getText().toString();
 

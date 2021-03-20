@@ -31,6 +31,7 @@ import com.sosaley.hatsun.utils.PreferencesUtil;
 import com.sosaley.hatsun.utils.ToastUtil;
 import com.sosaley.hatsun.utils.Validation;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 
 import okhttp3.ResponseBody;
@@ -333,6 +334,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private void launchHomeScreen() {
 
         Intent intent = new Intent(SignupActivity.this, QRDisplayActivity.class);
+        //intent.putExtra("Google", (Serializable) mGoogleSignInClient);
         startActivity(intent);
         finish();
 
