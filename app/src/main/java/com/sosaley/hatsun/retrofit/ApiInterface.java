@@ -12,7 +12,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -36,6 +35,11 @@ public interface ApiInterface {
 
     @POST(AppConstant.DOMAIN+"/validatedata")
     Call<BaseDTO> syncScanDataWithServer(@Body ValidateBatteryDTO validateBatteryDTO);
+
+    @POST(AppConstant.DOMAIN+"/")
+    Call<BaseDTO> sendEditedValueToServer(@Body ValidateBatteryDTO validateBatteryDTO);
+
+
 
 
 }

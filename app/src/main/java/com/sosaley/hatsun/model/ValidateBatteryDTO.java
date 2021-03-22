@@ -21,6 +21,12 @@ public class ValidateBatteryDTO {
     @SerializedName("slavetype")
     private String slaveType;
 
+    public ValidateBatteryDTO(String ups, String rackId, String slaveId, String slaveType) {
+        this.ups = ups;
+        this.rackId = rackId;
+        this.slaveId = slaveId;
+        this.slaveType = slaveType;
+    }
 
     public ValidateBatteryDTO(String batteryId, String clientName, String plantName, String batteryRoom, String ups, String rackId, String slaveId, String slaveType) {
         this.batteryId = batteryId;
