@@ -3,8 +3,11 @@ package com.sosaley.hatsun.menu;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -21,8 +24,10 @@ import com.sosaley.hatsun.model.ValidateBatteryDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
 import com.sosaley.hatsun.utils.AppConstant;
+import com.sosaley.hatsun.utils.MathUtil;
 import com.sosaley.hatsun.utils.PermissionUtils;
 import com.sosaley.hatsun.utils.PreferencesUtil;
+import com.sosaley.hatsun.utils.ToastUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +44,8 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
     public static RelativeLayout qrDisplayBlock;
 
     ImageView menuIcon;
+
+    TextView dataSync;
 
     private String client_Name,plant_Name,battery_Id,battety_Room_No,ups_No,rack_No,slave_No,slave_Type;
 
@@ -59,6 +66,8 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         edit = (Button) findViewById(R.id.edit);
         update = (Button) findViewById(R.id.update);
         sync = (Button) findViewById(R.id.sync);
+
+        dataSync=(TextView)findViewById(R.id.dataSync);
 
         clientName = (TextView) findViewById(R.id.clientName);
         plantName = (TextView) findViewById(R.id.plantName);
@@ -157,20 +166,80 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         ValidateBatteryDTO validateBatteryDTO=new ValidateBatteryDTO(battery_id,client_name,plant_name,battety_room_no,ups_no,rack_no,slave_no,slave_type);
 
 
-       Call<BaseDTO> call =apiInterface.syncScanDataWithServer(validateBatteryDTO);
-       call.enqueue(new Callback<BaseDTO>() {
+       Call<ValidateBatteryDTO> call =apiInterface.syncScanDataWithServer(validateBatteryDTO);
+       call.enqueue(new Callback<ValidateBatteryDTO>() {
            @Override
-           public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+           public void onResponse(Call<ValidateBatteryDTO> call, Response<ValidateBatteryDTO> response) {
 
-               BaseDTO baseDTO=response.body();
+               ValidateBatteryDTO validateBatteryDTO=response.body();
 
-               System.out.println("ScanBaseResponse "+baseDTO.getResponseCode());
+               if(validateBatteryDTO.getResponseCode().equals("200")){
+
+                //blinkText("Data synced successfully");
+
+                   MathUtil.startBlink(QRDisplayActivity.this,dataSync,"Data synced successfully");
+
+
+
+
+
+
+
+               }else if(validateBatteryDTO.getResponseCode().equals("500")){
+                   //blinkText("Data Mismatch");
+
+                   MathUtil.startBlink(QRDisplayActivity.this,dataSync,"DataMismatch");
+
+
+                   stopBlinking();
+
+
+
+                   if(validateBatteryDTO.getUps()==null){
+
+                   }else if(!validateBatteryDTO.getUps().equals(null)){
+
+                       //blink data
+                       System.out.println("UPSDataMisMatch");
+                       ToastUtil.showShortToast(QRDisplayActivity.this,"UPSDataMisMatch");
+
+
+                   }
+
+                   if(validateBatteryDTO.getRackId()==null){
+
+                   }else if(!validateBatteryDTO.getRackId().equals(null)){
+                       //blink
+                       System.out.println("RackIdMisMatch");
+                       ToastUtil.showShortToast(QRDisplayActivity.this,"RackIdMisMatch");
+                   }
+
+
+                   if(validateBatteryDTO.getSlaveId()==null){
+
+                   }else if(!validateBatteryDTO.getSlaveId().equals(null)){
+                       //blink
+                       System.out.println("SlaveIdMisMatch");
+                       ToastUtil.showShortToast(QRDisplayActivity.this,"SlaveIdMisMatch");
+                   }
+
+
+                   if(validateBatteryDTO.getSlaveType()==null){
+
+                   }else if(!validateBatteryDTO.getSlaveType().equals(null)){
+                       System.out.println("SlaveTypeMisMatch");
+                       ToastUtil.showShortToast(QRDisplayActivity.this,"SlaveTypeMisMatch");
+                   }
+
+               }
+
+               System.out.println("ScanBaseResponse "+validateBatteryDTO.getResponseCode());
 
 
            }
 
            @Override
-           public void onFailure(Call<BaseDTO> call, Throwable t) {
+           public void onFailure(Call<ValidateBatteryDTO> call, Throwable t) {
 
                System.out.println("ExceptionResult "+t.getMessage().toString());
 
@@ -180,6 +249,20 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
 
     }
+
+    private void stopBlinking() {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                MathUtil.stopBlink(QRDisplayActivity.this,dataSync);
+            }
+        },5000);
+
+
+    }
+
+
 
     private void callActivity() {
 

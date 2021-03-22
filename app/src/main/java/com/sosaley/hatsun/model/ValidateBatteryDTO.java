@@ -2,7 +2,7 @@ package com.sosaley.hatsun.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ValidateBatteryDTO {
+public class ValidateBatteryDTO extends BaseDTO{
 
     @SerializedName("batteryid")
     private String batteryId;

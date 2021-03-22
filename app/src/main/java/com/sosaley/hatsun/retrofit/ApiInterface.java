@@ -34,7 +34,7 @@ public interface ApiInterface {
     Call<UserResponseDTO> resetPassword(@Body ResetPasswordDTO resetPasswordDTO);
 
     @POST(AppConstant.DOMAIN+"/validatedata")
-    Call<BaseDTO> syncScanDataWithServer(@Body ValidateBatteryDTO validateBatteryDTO);
+    Call<ValidateBatteryDTO> syncScanDataWithServer(@Body ValidateBatteryDTO validateBatteryDTO);
 
     @POST(AppConstant.DOMAIN+"/")
     Call<BaseDTO> sendEditedValueToServer(@Body ValidateBatteryDTO validateBatteryDTO);

@@ -27,6 +27,8 @@
     <string name="slave_id">Slave ID #</string>
     <string name="slave_type">Slave Type</string>
 
+    <string name="data_success">Data Synced Successfully</string>
+
     <string name="sosaley">Sosaley Technologies Private Limited</string>
     <string name="w3sos">www.sosaley.in</string>
 
