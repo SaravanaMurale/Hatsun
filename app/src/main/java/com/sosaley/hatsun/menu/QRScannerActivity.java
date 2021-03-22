@@ -32,8 +32,8 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
         String scannedResult = result.getText();
 
         //QRDisplayActivity.displayQR.setText(result.getText());
-        QRDisplayActivity.edit.setVisibility(View.VISIBLE);
-        QRDisplayActivity.update.setVisibility(View.VISIBLE);
+        QRDisplayActivity.edit.setVisibility(View.INVISIBLE);
+        QRDisplayActivity.update.setVisibility(View.INVISIBLE);
         QRDisplayActivity.sync.setVisibility(View.VISIBLE);
         QRDisplayActivity.qrDisplayBlock.setVisibility(View.VISIBLE);
 
@@ -54,11 +54,12 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
 
             QRDisplayActivity.clientName.setText(words[1]);
             QRDisplayActivity.plantName.setText(words[2]);
-            QRDisplayActivity.batteryRoomNo.setText(words[3]);
-            QRDisplayActivity.upsNo.setText(words[4]);
-            QRDisplayActivity.rackNo.setText(words[5]);
-            QRDisplayActivity.slaveNo.setText(words[6]);
-            QRDisplayActivity.slaveType.setText(words[7]);
+            QRDisplayActivity.batteryId.setText(words[3]);
+            QRDisplayActivity.batteryRoomNo.setText(words[4]);
+            QRDisplayActivity.upsNo.setText(words[5]);
+            QRDisplayActivity.rackNo.setText(words[6]);
+            QRDisplayActivity.slaveNo.setText(words[7]);
+            QRDisplayActivity.slaveType.setText(words[8]);
 
 
             /*System.out.println("7th position"+words[7]);

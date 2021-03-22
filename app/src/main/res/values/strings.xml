@@ -20,6 +20,7 @@
 
     <string name="client_name">Client Name</string>
     <string name="plant_name">Plant Name</string>
+    <string name="battery_id">Battery ID</string>
     <string name="battery_no">Battery Room #</string>
     <string name="ups_no">UPS #</string>
     <string name="race_id">Ract ID #</string>

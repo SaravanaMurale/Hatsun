@@ -5,6 +5,7 @@ import com.sosaley.hatsun.model.LoginDTO;
 import com.sosaley.hatsun.model.ResetPasswordDTO;
 import com.sosaley.hatsun.model.UserDTO;
 import com.sosaley.hatsun.model.UserResponseDTO;
+import com.sosaley.hatsun.model.ValidateBatteryDTO;
 import com.sosaley.hatsun.utils.AppConstant;
 
 import okhttp3.ResponseBody;
@@ -32,6 +33,9 @@ public interface ApiInterface {
 
     @POST(AppConstant.DOMAIN+"/resetpassword")
     Call<UserResponseDTO> resetPassword(@Body ResetPasswordDTO resetPasswordDTO);
+
+    @POST(AppConstant.DOMAIN+"/validatedata")
+    Call<BaseDTO> syncScanDataWithServer(@Body ValidateBatteryDTO validateBatteryDTO);
 
 
 }

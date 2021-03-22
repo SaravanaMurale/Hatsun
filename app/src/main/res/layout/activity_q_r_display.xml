@@ -120,12 +120,44 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/batteryIdBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/plantNameBlock"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginRight="@dimen/five_dp"
+            android:layout_marginTop="@dimen/five_dp"
+            >
+
+            <TextView
+                android:id="@+id/batteryIdTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/battery_id"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/batteryId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="B20"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/batteryBlock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/plantNameBlock"
+            android:layout_below="@id/batteryIdBlock"
             android:layout_marginLeft="@dimen/five_dp"
             android:layout_marginRight="@dimen/five_dp"
             android:layout_marginTop="@dimen/five_dp"
