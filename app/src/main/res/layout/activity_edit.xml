@@ -13,7 +13,6 @@
         android:id="@+id/qrDisplayEditBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/hundren_dp"
         >
 
@@ -23,7 +22,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/five_dp"
             android:layout_marginRight="@dimen/five_dp"
-
             >
 
             <TextView
@@ -47,8 +45,6 @@
                 />
 
         </RelativeLayout>
-
-
         <RelativeLayout
             android:id="@+id/plantNameBlock"
             android:layout_width="match_parent"
@@ -80,7 +76,6 @@
                 />
 
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/batteryIdBlock"
             android:layout_width="match_parent"
@@ -121,7 +116,7 @@
             android:layout_below="@id/batteryIdBlock"
             android:layout_marginLeft="@dimen/five_dp"
             android:layout_marginRight="@dimen/five_dp"
-            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginTop="@dimen/twenty_dp"
             >
 
             <TextView
@@ -132,14 +127,17 @@
                 android:text="@string/battery_no"
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                android:layout_centerVertical="true"
                 />
 
             <EditText
                 android:id="@+id/batteryEdit"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/hundren_dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="3"
+                android:maxLines="1"
+                android:gravity="center"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 />
@@ -153,7 +151,7 @@
             android:layout_below="@id/batteryBlock"
             android:layout_marginLeft="@dimen/five_dp"
             android:layout_marginRight="@dimen/five_dp"
-            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginTop="@dimen/twenty_dp"
             >
             <TextView
                 android:id="@+id/upsTxt"
@@ -163,14 +161,16 @@
                 android:text="@string/ups_no"
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                android:layout_centerVertical="true"
                 />
 
             <EditText
                 android:id="@+id/upsEdit"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/hundren_dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="3"
+                android:gravity="center"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 />
@@ -185,7 +185,7 @@
             android:layout_below="@id/upsBlock"
             android:layout_marginLeft="@dimen/five_dp"
             android:layout_marginRight="@dimen/five_dp"
-            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginTop="@dimen/twenty_dp"
             >
             <TextView
                 android:id="@+id/rackTxt"
@@ -195,14 +195,16 @@
                 android:text="@string/race_id"
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                android:layout_centerVertical="true"
                 />
 
             <EditText
                 android:id="@+id/rackEdit"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/hundren_dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="3"
+                android:gravity="center"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 />
@@ -216,7 +218,7 @@
             android:layout_below="@id/rackBlock"
             android:layout_marginLeft="@dimen/five_dp"
             android:layout_marginRight="@dimen/five_dp"
-            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginTop="@dimen/twenty_dp"
             >
 
             <TextView
@@ -227,14 +229,16 @@
                 android:text="@string/slave_id"
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                android:layout_centerVertical="true"
                 />
 
             <EditText
                 android:id="@+id/slaveEdit"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/hundren_dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="3"
+                android:gravity="center"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 />
@@ -248,7 +252,7 @@
             android:layout_below="@id/slaveIdBlock"
             android:layout_marginLeft="@dimen/five_dp"
             android:layout_marginRight="@dimen/five_dp"
-            android:layout_marginTop="@dimen/five_dp">
+            android:layout_marginTop="@dimen/twenty_dp">
 
             <TextView
                 android:id="@+id/slaveTypeTxt"
@@ -258,14 +262,16 @@
                 android:text="@string/slave_type"
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                android:layout_centerVertical="true"
                 />
 
             <EditText
                 android:id="@+id/slaveTypeEdit"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/hundren_dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="3"
+                android:gravity="center"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 />
