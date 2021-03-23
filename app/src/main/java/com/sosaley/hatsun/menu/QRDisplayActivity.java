@@ -51,29 +51,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_q_r_display);
 
-
-
-        btnScanQR = (Button) findViewById(R.id.btnScanQR);
-        displayQR = (TextView) findViewById(R.id.displayQR);
-
-        menuIcon = (ImageView) findViewById(R.id.menuIcon);
-
-        qrDisplayBlock = (RelativeLayout) findViewById(R.id.qrDisplayBlock);
-
-        edit = (Button) findViewById(R.id.edit);
-        update = (Button) findViewById(R.id.update);
-        sync = (Button) findViewById(R.id.sync);
-
-        dataSync=(TextView)findViewById(R.id.dataSync);
-
-        clientName = (TextView) findViewById(R.id.clientName);
-        plantName = (TextView) findViewById(R.id.plantName);
-        batteryId=(TextView)findViewById(R.id.batteryId);
-        batteryRoomNo = (TextView) findViewById(R.id.battery);
-        upsNo = (TextView) findViewById(R.id.ups);
-        rackNo = (TextView) findViewById(R.id.rack);
-        slaveNo = (TextView) findViewById(R.id.slave);
-        slaveType = (TextView) findViewById(R.id.slaveType);
+        initView();
 
         sync.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,10 +72,10 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
             @Override
             public void onClick(View view) {
 
-                MathUtil.stopBlink(QRDisplayActivity.this,upsNo);
-                MathUtil.stopBlink(QRDisplayActivity.this,rackNo);
-                MathUtil.stopBlink(QRDisplayActivity.this,slaveNo);
-                MathUtil.stopBlink(QRDisplayActivity.this,slaveType);
+                MathUtil.parameterStatusBlinkStop(QRDisplayActivity.this,upsNo);
+                MathUtil.parameterStatusBlinkStop(QRDisplayActivity.this,rackNo);
+                MathUtil.parameterStatusBlinkStop(QRDisplayActivity.this,slaveNo);
+                MathUtil.parameterStatusBlinkStop(QRDisplayActivity.this,slaveType);
                 qrDisplayBlock.setVisibility(View.INVISIBLE);
 
                 if (!PermissionUtils.hasPermission(QRDisplayActivity.this, Manifest.permission.CAMERA)) {
@@ -127,6 +105,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
 
 
+
     private void syncScannedDataWithServer() {
 
         edit.setVisibility(View.VISIBLE);
@@ -140,28 +119,12 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         slave_No=slaveNo.getText().toString().trim();
         slave_Type=slaveType.getText().toString().trim();
 
-
-        System.out.println("ClientNameInQRDisplay"+client_Name+" "+plant_Name+" "+battery_Id+" "+battety_Room_No+" "+ups_No+" "+rack_No+" "+slave_No+" "+slave_Type);
+        //System.out.println("ClientNameInQRDisplay"+client_Name+" "+plant_Name+" "+battery_Id+" "+battety_Room_No+" "+ups_No+" "+rack_No+" "+slave_No+" "+slave_Type);
 
         sendDataToServerToSync(client_Name,plant_Name,battery_Id,battety_Room_No,ups_No,rack_No,slave_No,slave_Type);
     }
 
-    private void editScannedDataWithServer() {
 
-        Intent intent=new Intent(QRDisplayActivity.this,EditActivity.class);
-
-        intent.putExtra("CLIENTNAME",client_Name);
-        intent.putExtra("PLANTNAME",plant_Name);
-        intent.putExtra("BATTERYID",battery_Id);
-        intent.putExtra("BATTERYROOM",battety_Room_No);
-        intent.putExtra("UPS",ups_No);
-        intent.putExtra("RACKNO",rack_No);
-        intent.putExtra("SLAVENO",slave_No);
-        intent.putExtra("SLAVETYPE",slave_Type);
-
-        startActivity(intent);
-
-    }
 
     private void sendDataToServerToSync(String client_name, String plant_name, String battery_id, String battety_room_no, String ups_no, String rack_no, String slave_no, String slave_type) {
 
@@ -180,11 +143,8 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
                if(validateBatteryDTO.getResponseCode().equals("200")){
 
-                //blinkText("Data synced successfully");
-
                    dataSync.setTextColor(getColor(R.color.hatsun_blue));
-                   dataSync.setText("Data synced successfully");
-                   MathUtil.startBlink(QRDisplayActivity.this,dataSync,"Data synced successfully");
+                   MathUtil.syncStatusBlinkStart(QRDisplayActivity.this,dataSync,"Data synced successfully");
 
                    stopBlinking();
 
@@ -193,8 +153,8 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    //blinkText("Data Mismatch");
 
                    dataSync.setTextColor(getColor(R.color.red));
-                   dataSync.setText("Data Mismatch");
-                   MathUtil.startBlink(QRDisplayActivity.this,dataSync,"DataMismatch");
+                   //dataSync.setText("Data Mismatch");
+                   MathUtil.syncStatusBlinkStart(QRDisplayActivity.this,dataSync,"DataMismatch");
                    stopBlinking();
 
 
@@ -204,7 +164,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
 
                        upsNo.setTextColor(getColor(R.color.red));
-                       MathUtil.startBlink(QRDisplayActivity.this,upsNo,getString(R.string.mismatch_ups));
+                       MathUtil.parameterStatusBlinkStart(QRDisplayActivity.this,upsNo,getString(R.string.mismatch_ups));
 
                        System.out.println("UPSDataMisMatch");
 
@@ -216,7 +176,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    }else if(!validateBatteryDTO.getRackId().equals(null)){
 
                        rackNo.setTextColor(getColor(R.color.red));
-                       MathUtil.startBlink(QRDisplayActivity.this,rackNo,getString(R.string.mismatch_rack));
+                       MathUtil.parameterStatusBlinkStart(QRDisplayActivity.this,rackNo,getString(R.string.mismatch_rack));
                        //blink
                        System.out.println("RackIdMisMatch");
                        //ToastUtil.showShortToast(QRDisplayActivity.this,"RackIdMisMatch");
@@ -228,7 +188,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    }else if(!validateBatteryDTO.getSlaveId().equals(null)){
 
                        slaveNo.setTextColor(getColor(R.color.red));
-                       MathUtil.startBlink(QRDisplayActivity.this,slaveNo,getString(R.string.mismatch_slaveid));
+                       MathUtil.parameterStatusBlinkStart(QRDisplayActivity.this,slaveNo,getString(R.string.mismatch_slaveid));
 
                        //blink
                        System.out.println("SlaveIdMisMatch");
@@ -241,7 +201,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    }else if(!validateBatteryDTO.getSlaveType().equals(null)){
 
                        slaveType.setTextColor(getColor(R.color.red));
-                       MathUtil.startBlink(QRDisplayActivity.this,slaveType,getString(R.string.mismatch_slavetype));
+                       MathUtil.parameterStatusBlinkStart(QRDisplayActivity.this,slaveType,getString(R.string.mismatch_slavetype));
 
                        System.out.println("SlaveTypeMisMatch");
                        //ToastUtil.showShortToast(QRDisplayActivity.this,"SlaveTypeMisMatch");
@@ -266,12 +226,29 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
     }
 
+    private void editScannedDataWithServer() {
+
+        Intent intent=new Intent(QRDisplayActivity.this,EditActivity.class);
+
+        intent.putExtra("CLIENTNAME",client_Name);
+        intent.putExtra("PLANTNAME",plant_Name);
+        intent.putExtra("BATTERYID",battery_Id);
+        intent.putExtra("BATTERYROOM",battety_Room_No);
+        intent.putExtra("UPS",ups_No);
+        intent.putExtra("RACKNO",rack_No);
+        intent.putExtra("SLAVENO",slave_No);
+        intent.putExtra("SLAVETYPE",slave_Type);
+
+        startActivity(intent);
+
+    }
+
     private void stopBlinking() {
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                MathUtil.stopBlink(QRDisplayActivity.this,dataSync);
+                MathUtil.syncStatusBlinkStop(QRDisplayActivity.this,dataSync);
             }
         },5000);
 
@@ -307,5 +284,30 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
             default:
                 return false;
        }
+    }
+
+    private void initView() {
+        btnScanQR = (Button) findViewById(R.id.btnScanQR);
+        displayQR = (TextView) findViewById(R.id.displayQR);
+
+        menuIcon = (ImageView) findViewById(R.id.menuIcon);
+
+        qrDisplayBlock = (RelativeLayout) findViewById(R.id.qrDisplayBlock);
+
+        edit = (Button) findViewById(R.id.edit);
+        update = (Button) findViewById(R.id.update);
+        sync = (Button) findViewById(R.id.sync);
+
+        dataSync=(TextView)findViewById(R.id.dataSync);
+
+        clientName = (TextView) findViewById(R.id.clientName);
+        plantName = (TextView) findViewById(R.id.plantName);
+        batteryId=(TextView)findViewById(R.id.batteryId);
+        batteryRoomNo = (TextView) findViewById(R.id.battery);
+        upsNo = (TextView) findViewById(R.id.ups);
+        rackNo = (TextView) findViewById(R.id.rack);
+        slaveNo = (TextView) findViewById(R.id.slave);
+        slaveType = (TextView) findViewById(R.id.slaveType);
+
     }
 }
