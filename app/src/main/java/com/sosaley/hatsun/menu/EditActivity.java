@@ -1,5 +1,6 @@
 package com.sosaley.hatsun.menu;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +16,9 @@ import com.sosaley.hatsun.model.BaseDTO;
 import com.sosaley.hatsun.model.ValidateBatteryDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
+import com.sosaley.hatsun.utils.Loader;
 import com.sosaley.hatsun.utils.ToastUtil;
+import com.sosaley.hatsun.utils.Validation;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,7 +74,49 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                sendEditedValueToServer();
+                //if()
+
+                String userEnteredUPS=upsNoEditText.getText().toString();
+                String userEnteredRackNo=rackNoEditText.getText().toString();
+                String userEnteredSlaveNo=slaveNoEditText.getText().toString();
+                String userEnteredSlaveType=slaveTypeEditText.getText().toString();
+
+                if(!Validation.validateEmptyData(userEnteredUPS)){
+
+                    ToastUtil.showShortToast(EditActivity.this,"UPS Data ant be empty");
+                    return;
+                }
+
+                if(!Validation.validateEmptyData(userEnteredRackNo)){
+
+                    ToastUtil.showShortToast(EditActivity.this,"RackNo cant be empty");
+                    return;
+                }
+
+                if(!Validation.validateEmptyData(userEnteredSlaveNo)){
+
+                    ToastUtil.showShortToast(EditActivity.this,"SlaveNo cant be empty");
+                    return;
+                }
+
+                if(!Validation.validateEmptyData(userEnteredSlaveType)){
+
+                    ToastUtil.showShortToast(EditActivity.this,"SlaveType cant be empty");
+                    return;
+                }
+
+
+                if(!Validation.validateEditData(userEnteredUPS) || !Validation.validateEditData(userEnteredRackNo) || !Validation.validateEditData(userEnteredSlaveNo) || !Validation.validateEditData(userEnteredSlaveType)){
+
+                    ToastUtil.showLongToast(EditActivity.this,"Please Enter Valid Data");
+                    return;
+
+                } else if(Validation.validateEditData(userEnteredUPS) && Validation.validateEditData(userEnteredRackNo) && Validation.validateEditData(userEnteredSlaveNo) && Validation.validateEditData(userEnteredSlaveType)){
+                    ToastUtil.showLongToast(EditActivity.this,"Mail Sent");
+                    //sendEditedValueToServer(userEnteredUPS,userEnteredRackNo,userEnteredSlaveNo,userEnteredSlaveType);
+                }
+
+
 
             }
         });
@@ -95,12 +140,14 @@ public class EditActivity extends AppCompatActivity {
 
     }
 
-    private void sendEditedValueToServer() {
+    private void sendEditedValueToServer(String userEnteredUPS, String userEnteredRackNo, String userEnteredSlaveNo, String userEnteredSlaveType) {
 
-        String userEnteredUPS=upsNoEditText.getText().toString();
+        /*String userEnteredUPS=upsNoEditText.getText().toString();
         String userEnteredRackNo=rackNoEditText.getText().toString();
         String userEnteredSlaveNo=slaveNoEditText.getText().toString();
-        String userEnteredSlaveType=slaveTypeEditText.getText().toString();
+        String userEnteredSlaveType=slaveTypeEditText.getText().toString();*/
+
+        final Dialog dialog =Loader.showProgressBar(EditActivity.this);
 
 
         if(!ups_No_Value.equals(userEnteredUPS)){
@@ -150,6 +197,8 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
 
+                Loader.dismisProgressBar(EditActivity.this,dialog);
+
                 BaseDTO baseDTO=response.body();
 
                 System.out.println("EditResponse "+baseDTO.getResponseCode());
@@ -169,6 +218,8 @@ public class EditActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<BaseDTO> call, Throwable t) {
+
+                Loader.dismisProgressBar(EditActivity.this,dialog);
 
                 System.out.println("Exception "+t.getMessage().toString());
 

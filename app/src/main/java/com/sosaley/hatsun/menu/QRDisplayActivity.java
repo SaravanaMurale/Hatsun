@@ -175,6 +175,8 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
                    MathUtil.startBlink(QRDisplayActivity.this,dataSync,"Data synced successfully");
 
+                   stopBlinking();
+
 
 
                }else if(validateBatteryDTO.getResponseCode().equals("500")){

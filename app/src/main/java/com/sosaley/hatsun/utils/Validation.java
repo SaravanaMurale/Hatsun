@@ -2,6 +2,8 @@ package com.sosaley.hatsun.utils;
 
 import android.util.Patterns;
 
+import com.sosaley.hatsun.menu.EditActivity;
+
 public class Validation {
 
     public static boolean validateName(String name) {
@@ -43,6 +45,25 @@ public class Validation {
 
     public static boolean validatePassword(String password) {
         if (password.length() < 6) {
+
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validateEditData(String data) {
+
+        if (data.length() < 1) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public static boolean validateEmptyData(String userEnteredData){
+
+        if(userEnteredData.equals("") || userEnteredData.isEmpty() || userEnteredData==null || userEnteredData.equals(null)){
 
             return false;
         }
