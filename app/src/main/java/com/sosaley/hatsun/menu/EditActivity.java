@@ -140,7 +140,9 @@ public class EditActivity extends AppCompatActivity {
 
         ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
 
-        ValidateBatteryDTO validateBatteryDTO=new ValidateBatteryDTO(battery_Id_Value,currentUpsNo,currentRackNo,currentSlaveNo,currentSlaveType);
+        ValidateBatteryDTO validateBatteryDTO=new ValidateBatteryDTO(battery_Id_Value,"null","null","null",currentUpsNo,currentRackNo,currentSlaveNo,currentSlaveType);
+
+        //ValidateBatteryDTO validateBatteryDTO=new ValidateBatteryDTO(battery_Id_Value,currentUpsNo,currentRackNo,currentSlaveNo,currentSlaveType);
 
         Call<BaseDTO> call =apiInterface.sendEditedValueToServer(validateBatteryDTO);
 

@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -19,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sosaley.hatsun.R;
 import com.sosaley.hatsun.authentication.SigninActivity;
-import com.sosaley.hatsun.model.BaseDTO;
 import com.sosaley.hatsun.model.ValidateBatteryDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
@@ -27,7 +24,6 @@ import com.sosaley.hatsun.utils.AppConstant;
 import com.sosaley.hatsun.utils.MathUtil;
 import com.sosaley.hatsun.utils.PermissionUtils;
 import com.sosaley.hatsun.utils.PreferencesUtil;
-import com.sosaley.hatsun.utils.ToastUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
