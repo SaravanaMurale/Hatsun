@@ -181,10 +181,6 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
 
 
-
-
-
-
                }else if(validateBatteryDTO.getResponseCode().equals("500")){
                    //blinkText("Data Mismatch");
 
@@ -194,14 +190,13 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    stopBlinking();
 
 
-
                    if(validateBatteryDTO.getUps()==null){
 
                    }else if(!validateBatteryDTO.getUps().equals(null)){
 
                        //blink data
                        System.out.println("UPSDataMisMatch");
-                       ToastUtil.showShortToast(QRDisplayActivity.this,"UPSDataMisMatch");
+                       //ToastUtil.showShortToast(QRDisplayActivity.this,"UPSDataMisMatch");
 
 
                    }
@@ -211,7 +206,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    }else if(!validateBatteryDTO.getRackId().equals(null)){
                        //blink
                        System.out.println("RackIdMisMatch");
-                       ToastUtil.showShortToast(QRDisplayActivity.this,"RackIdMisMatch");
+                       //ToastUtil.showShortToast(QRDisplayActivity.this,"RackIdMisMatch");
                    }
 
 
@@ -220,7 +215,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    }else if(!validateBatteryDTO.getSlaveId().equals(null)){
                        //blink
                        System.out.println("SlaveIdMisMatch");
-                       ToastUtil.showShortToast(QRDisplayActivity.this,"SlaveIdMisMatch");
+                       //ToastUtil.showShortToast(QRDisplayActivity.this,"SlaveIdMisMatch");
                    }
 
 
@@ -228,7 +223,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
                    }else if(!validateBatteryDTO.getSlaveType().equals(null)){
                        System.out.println("SlaveTypeMisMatch");
-                       ToastUtil.showShortToast(QRDisplayActivity.this,"SlaveTypeMisMatch");
+                       //ToastUtil.showShortToast(QRDisplayActivity.this,"SlaveTypeMisMatch");
                    }
 
                }

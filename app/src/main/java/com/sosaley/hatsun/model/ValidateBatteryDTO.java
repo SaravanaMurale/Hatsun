@@ -21,7 +21,9 @@ public class ValidateBatteryDTO extends BaseDTO{
     @SerializedName("slavetype")
     private String slaveType;
 
-    public ValidateBatteryDTO(String ups, String rackId, String slaveId, String slaveType) {
+    public ValidateBatteryDTO(String batteryid,String ups, String rackId, String slaveId, String slaveType) {
+
+        this.batteryId=batteryid;
         this.ups = ups;
         this.rackId = rackId;
         this.slaveId = slaveId;

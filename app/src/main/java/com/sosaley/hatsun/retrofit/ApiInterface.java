@@ -36,7 +36,7 @@ public interface ApiInterface {
     @POST(AppConstant.DOMAIN+"/validatedata")
     Call<ValidateBatteryDTO> syncScanDataWithServer(@Body ValidateBatteryDTO validateBatteryDTO);
 
-    @POST(AppConstant.DOMAIN+"/")
+    @POST(AppConstant.MAIL_DOMAIN+"/sendMail")
     Call<BaseDTO> sendEditedValueToServer(@Body ValidateBatteryDTO validateBatteryDTO);
 
 

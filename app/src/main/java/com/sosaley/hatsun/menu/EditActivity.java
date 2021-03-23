@@ -2,6 +2,7 @@ package com.sosaley.hatsun.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import com.sosaley.hatsun.model.BaseDTO;
 import com.sosaley.hatsun.model.ValidateBatteryDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
+import com.sosaley.hatsun.utils.ToastUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -125,7 +127,7 @@ public class EditActivity extends AppCompatActivity {
             currentSlaveNo=null;
         }
 
-        if(slave_Type_Value.equals(userEnteredSlaveType)){
+        if(!slave_Type_Value.equals(userEnteredSlaveType)){
 
             System.out.println("SlaveTypeChanged");
             currentSlaveType=userEnteredSlaveType;
@@ -138,7 +140,7 @@ public class EditActivity extends AppCompatActivity {
 
         ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
 
-        ValidateBatteryDTO validateBatteryDTO=new ValidateBatteryDTO(currentUpsNo,currentRackNo,currentSlaveNo,currentSlaveType);
+        ValidateBatteryDTO validateBatteryDTO=new ValidateBatteryDTO(battery_Id_Value,currentUpsNo,currentRackNo,currentSlaveNo,currentSlaveType);
 
         Call<BaseDTO> call =apiInterface.sendEditedValueToServer(validateBatteryDTO);
 
@@ -150,6 +152,16 @@ public class EditActivity extends AppCompatActivity {
 
                 System.out.println("EditResponse "+baseDTO.getResponseCode());
 
+                ToastUtil.showLongToast(EditActivity.this,"Mail Sent Successfully");
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        launchQRScanActivity();
+                    }
+                },2000);
+
+
 
             }
 
@@ -160,6 +172,14 @@ public class EditActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void launchQRScanActivity() {
+
+        Intent intent=new Intent(EditActivity.this,QRDisplayActivity.class);
+        startActivity(intent);
+        finish();
 
     }
 }
