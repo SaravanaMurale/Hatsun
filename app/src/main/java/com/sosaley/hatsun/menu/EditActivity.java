@@ -26,9 +26,9 @@ import retrofit2.Response;
 
 public class EditActivity extends AppCompatActivity {
 
-    private TextView clientNameTextView,plantNameTextView,batteryIdTextView;
+    private TextView clientNameTextView,plantNameTextView,batteryIdTextView,batteryRoomNoEditText;
 
-    public static EditText batteryRoomNoEditText, upsNoEditText, rackNoEditText, slaveNoEditText, slaveTypeEditText;
+    public static EditText upsNoEditText, rackNoEditText, slaveNoEditText, slaveTypeEditText;
 
     private String client_Name_Value,plant_Name_Value,battery_Id_Value,battety_Room_No_Value,ups_No_Value,rack_No_Value,slave_No_Value,slave_Type_Value;
 
@@ -58,7 +58,7 @@ public class EditActivity extends AppCompatActivity {
         clientNameTextView = (TextView) findViewById(R.id.clientNameEdit);
         plantNameTextView = (TextView) findViewById(R.id.plantNameEdit);
         batteryIdTextView=(TextView)findViewById(R.id.batteryIdEdit);
-        batteryRoomNoEditText = (EditText) findViewById(R.id.batteryEdit);
+        batteryRoomNoEditText = (TextView) findViewById(R.id.batteryEdit);
 
         upsNoEditText = (EditText) findViewById(R.id.upsEdit);
         rackNoEditText = (EditText) findViewById(R.id.rackEdit);
@@ -113,7 +113,7 @@ public class EditActivity extends AppCompatActivity {
 
                 } else if(Validation.validateEditData(userEnteredUPS) && Validation.validateEditData(userEnteredRackNo) && Validation.validateEditData(userEnteredSlaveNo) && Validation.validateEditData(userEnteredSlaveType)){
                     ToastUtil.showLongToast(EditActivity.this,"Mail Sent");
-                    //sendEditedValueToServer(userEnteredUPS,userEnteredRackNo,userEnteredSlaveNo,userEnteredSlaveType);
+                    sendEditedValueToServer(userEnteredUPS,userEnteredRackNo,userEnteredSlaveNo,userEnteredSlaveType);
                 }
 
 
@@ -210,7 +210,7 @@ public class EditActivity extends AppCompatActivity {
                     public void run() {
                         launchQRScanActivity();
                     }
-                },2000);
+                },1000);
 
 
 

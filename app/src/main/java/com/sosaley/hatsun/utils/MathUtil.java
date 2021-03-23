@@ -6,13 +6,11 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
-import java.util.logging.Handler;
-
 public class MathUtil {
 
     public static void startBlink(Context context, TextView textView, String data) {
 
-        textView.setText(data);
+        //textView.setText(data);
 
         textView.setVisibility(View.VISIBLE);
 
@@ -27,10 +25,6 @@ public class MathUtil {
     }
 
     public static void stopBlink(Context context, TextView textView) {
-
-
-        Context context1;
-
 
         textView.setVisibility(View.INVISIBLE);
         textView.clearAnimation();

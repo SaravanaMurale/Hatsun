@@ -52,7 +52,7 @@
             android:layout_below="@id/clientNameBlock"
             android:layout_marginLeft="@dimen/five_dp"
             android:layout_marginRight="@dimen/five_dp"
-            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginTop="@dimen/fifteen_dp"
             >
 
             <TextView
@@ -83,7 +83,7 @@
             android:layout_below="@id/plantNameBlock"
             android:layout_marginLeft="@dimen/five_dp"
             android:layout_marginRight="@dimen/five_dp"
-            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginTop="@dimen/fifteen_dp"
             >
 
             <TextView
@@ -130,7 +130,7 @@
                 android:layout_centerVertical="true"
                 />
 
-            <EditText
+            <TextView
                 android:id="@+id/batteryEdit"
                 android:layout_width="@dimen/hundren_dp"
                 android:layout_height="wrap_content"

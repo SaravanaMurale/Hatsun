@@ -40,4 +40,9 @@
 
     <string name="enter_password">Please Enter Password</string>
     <string name="enter_confirm_password">Please Enter Confirm Password</string>
+
+    <string name="mismatch_ups">UPS Data Mismatch</string>
+    <string name="mismatch_rack">RackId Mismatch</string>
+    <string name="mismatch_slaveid">Slave Id Mismatch</string>
+    <string name="mismatch_slavetype">Slave Type Mismatch</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.sosaley.hatsun.menu;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -92,6 +93,9 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         btnScanQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                view.clearAnimation();
+
                 if (!PermissionUtils.hasPermission(QRDisplayActivity.this, Manifest.permission.CAMERA)) {
 
 
@@ -164,6 +168,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
        Call<ValidateBatteryDTO> call =apiInterface.syncScanDataWithServer(validateBatteryDTO);
        call.enqueue(new Callback<ValidateBatteryDTO>() {
+           @SuppressLint("NewApi")
            @Override
            public void onResponse(Call<ValidateBatteryDTO> call, Response<ValidateBatteryDTO> response) {
 
@@ -173,18 +178,17 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
                 //blinkText("Data synced successfully");
 
+                   dataSync.setTextColor(getColor(R.color.hatsun_blue));
                    MathUtil.startBlink(QRDisplayActivity.this,dataSync,"Data synced successfully");
 
                    stopBlinking();
 
 
-
                }else if(validateBatteryDTO.getResponseCode().equals("500")){
                    //blinkText("Data Mismatch");
 
+                   dataSync.setTextColor(getColor(R.color.red));
                    MathUtil.startBlink(QRDisplayActivity.this,dataSync,"DataMismatch");
-
-
                    stopBlinking();
 
 
@@ -192,9 +196,11 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
                    }else if(!validateBatteryDTO.getUps().equals(null)){
 
-                       //blink data
+
+                       upsNo.setTextColor(getColor(R.color.red));
+                       MathUtil.startBlink(QRDisplayActivity.this,upsNo,getString(R.string.mismatch_ups));
+
                        System.out.println("UPSDataMisMatch");
-                       //ToastUtil.showShortToast(QRDisplayActivity.this,"UPSDataMisMatch");
 
 
                    }
@@ -202,6 +208,9 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    if(validateBatteryDTO.getRackId()==null){
 
                    }else if(!validateBatteryDTO.getRackId().equals(null)){
+
+                       rackNo.setTextColor(getColor(R.color.red));
+                       MathUtil.startBlink(QRDisplayActivity.this,rackNo,getString(R.string.mismatch_rack));
                        //blink
                        System.out.println("RackIdMisMatch");
                        //ToastUtil.showShortToast(QRDisplayActivity.this,"RackIdMisMatch");
@@ -211,6 +220,10 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    if(validateBatteryDTO.getSlaveId()==null){
 
                    }else if(!validateBatteryDTO.getSlaveId().equals(null)){
+
+                       slaveNo.setTextColor(getColor(R.color.red));
+                       MathUtil.startBlink(QRDisplayActivity.this,slaveNo,getString(R.string.mismatch_slaveid));
+
                        //blink
                        System.out.println("SlaveIdMisMatch");
                        //ToastUtil.showShortToast(QRDisplayActivity.this,"SlaveIdMisMatch");
@@ -220,6 +233,10 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    if(validateBatteryDTO.getSlaveType()==null){
 
                    }else if(!validateBatteryDTO.getSlaveType().equals(null)){
+
+                       slaveType.setTextColor(getColor(R.color.red));
+                       MathUtil.startBlink(QRDisplayActivity.this,slaveType,getString(R.string.mismatch_slavetype));
+
                        System.out.println("SlaveTypeMisMatch");
                        //ToastUtil.showShortToast(QRDisplayActivity.this,"SlaveTypeMisMatch");
                    }
