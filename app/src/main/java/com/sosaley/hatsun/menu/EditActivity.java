@@ -112,7 +112,8 @@ public class EditActivity extends AppCompatActivity {
                     return;
 
                 } else if(Validation.validateEditData(userEnteredUPS) && Validation.validateEditData(userEnteredRackNo) && Validation.validateEditData(userEnteredSlaveNo) && Validation.validateEditData(userEnteredSlaveType)){
-                    ToastUtil.showLongToast(EditActivity.this,"Mail Sent");
+                    //ToastUtil.showLongToast(EditActivity.this,"Mail Sent");
+
                     sendEditedValueToServer(userEnteredUPS,userEnteredRackNo,userEnteredSlaveNo,userEnteredSlaveType);
                 }
 
@@ -141,11 +142,6 @@ public class EditActivity extends AppCompatActivity {
     }
 
     private void sendEditedValueToServer(String userEnteredUPS, String userEnteredRackNo, String userEnteredSlaveNo, String userEnteredSlaveType) {
-
-        /*String userEnteredUPS=upsNoEditText.getText().toString();
-        String userEnteredRackNo=rackNoEditText.getText().toString();
-        String userEnteredSlaveNo=slaveNoEditText.getText().toString();
-        String userEnteredSlaveType=slaveTypeEditText.getText().toString();*/
 
         final Dialog dialog =Loader.showProgressBar(EditActivity.this);
 
@@ -181,6 +177,12 @@ public class EditActivity extends AppCompatActivity {
 
         }else {
             currentSlaveType=null;
+        }
+
+        if(currentUpsNo==null && currentRackNo==null && currentSlaveNo==null && currentSlaveType==null){
+            ToastUtil.showLongToast(EditActivity.this,getString(R.string.not_changed));
+            Loader.dismisProgressBar(EditActivity.this,dialog);
+            return;
         }
 
 
