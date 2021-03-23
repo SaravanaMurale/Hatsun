@@ -94,7 +94,11 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
             @Override
             public void onClick(View view) {
 
-                view.clearAnimation();
+                MathUtil.stopBlink(QRDisplayActivity.this,upsNo);
+                MathUtil.stopBlink(QRDisplayActivity.this,rackNo);
+                MathUtil.stopBlink(QRDisplayActivity.this,slaveNo);
+                MathUtil.stopBlink(QRDisplayActivity.this,slaveType);
+                qrDisplayBlock.setVisibility(View.INVISIBLE);
 
                 if (!PermissionUtils.hasPermission(QRDisplayActivity.this, Manifest.permission.CAMERA)) {
 
@@ -179,6 +183,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                 //blinkText("Data synced successfully");
 
                    dataSync.setTextColor(getColor(R.color.hatsun_blue));
+                   dataSync.setText("Data synced successfully");
                    MathUtil.startBlink(QRDisplayActivity.this,dataSync,"Data synced successfully");
 
                    stopBlinking();
@@ -188,6 +193,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                    //blinkText("Data Mismatch");
 
                    dataSync.setTextColor(getColor(R.color.red));
+                   dataSync.setText("Data Mismatch");
                    MathUtil.startBlink(QRDisplayActivity.this,dataSync,"DataMismatch");
                    stopBlinking();
 

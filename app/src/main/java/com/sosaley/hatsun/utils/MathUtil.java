@@ -26,10 +26,9 @@ public class MathUtil {
 
     public static void stopBlink(Context context, TextView textView) {
 
-        textView.setVisibility(View.INVISIBLE);
+        //textView.setVisibility(View.INVISIBLE);
         textView.clearAnimation();
 
     }
-
 
 }
