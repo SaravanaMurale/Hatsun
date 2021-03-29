@@ -9,13 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sosaley.hatsun.R;
+import com.sosaley.hatsun.model.GetUserDTO;
+import com.sosaley.hatsun.model.UserResponseDTO;
+import com.sosaley.hatsun.retrofit.ApiClient;
+import com.sosaley.hatsun.retrofit.ApiInterface;
+import com.sosaley.hatsun.utils.PreferencesUtil;
+import com.sosaley.hatsun.utils.ToastUtil;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity {
 
     RelativeLayout userNameBlock, emailBlock, mobileBlock, changePasswordBlock;
+
+    TextView userName,email,mobile,changePassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +40,14 @@ public class ProfileActivity extends AppCompatActivity {
         mobileBlock = (RelativeLayout) findViewById(R.id.mobileBlock);
         changePasswordBlock = (RelativeLayout) findViewById(R.id.changePasswordBlock);
 
+        userName=(TextView)findViewById(R.id.userName);
+        email=(TextView)findViewById(R.id.email);
+        mobile=(TextView)findViewById(R.id.mobile);
+        changePassword=(TextView)findViewById(R.id.changePassword);
+
+
+
+        getUserDetailsFromServer();
 
 
         userNameBlock.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +86,43 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    private void getUserDetailsFromServer() {
+
+        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+
+        GetUserDTO getUserDTO=new GetUserDTO(PreferencesUtil.getValueInt(ProfileActivity.this,PreferencesUtil.USER_ID));
+
+        Call<UserResponseDTO> call =apiInterface.getUserDetails(getUserDTO);
+
+        call.enqueue(new Callback<UserResponseDTO>() {
+            @Override
+            public void onResponse(Call<UserResponseDTO> call, Response<UserResponseDTO> response) {
+
+                UserResponseDTO userResponseDTO=response.body();
+
+                if(userResponseDTO!=null){
+
+                    userName.setText(userResponseDTO.getUserName());
+                    email.setText(userResponseDTO.getUserEmail());
+                    mobile.setText(userResponseDTO.getUserMobile());
+
+                }else {
+                    ToastUtil.showLongToast(ProfileActivity.this,"No User Data");
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<UserResponseDTO> call, Throwable t) {
+
+            }
+        });
+
+
+
+    }
+
     private void openDialog(String hintData, final int i) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -83,25 +141,18 @@ public class ProfileActivity extends AppCompatActivity {
                 if (i == 1) {
                     //update name
 
-
+                    //updateUserDetails()
 
                 } else if (i == 2) {
                     //update Email
-
 
                 } else if (i == 3) {
 
                     //update mobile
 
-
-
-
                 } else if (i == 4) {
                     //update password
-
-
                 }
-
 
             }
         });

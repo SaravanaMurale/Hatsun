@@ -19,7 +19,6 @@
             android:layout_centerHorizontal="true"
             />
 
-
     </RelativeLayout>
 
 
@@ -172,9 +171,7 @@
         android:text="@string/sosaley"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/black"
-
-        />
+        android:textColor="@color/black" />
 
 
 

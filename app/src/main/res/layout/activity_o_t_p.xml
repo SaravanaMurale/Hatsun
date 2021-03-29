@@ -29,8 +29,6 @@
         android:layout_centerHorizontal="true"
         />
 
-
-
     <in.aabhasjindal.otptextview.OtpTextView
         android:id="@+id/otpTextView"
         android:layout_width="wrap_content"
