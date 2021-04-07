@@ -17,6 +17,16 @@
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
 
+    <string name="reg_user">Your Already Register User,Please Signin</string>
+    <string name="enter_valid">Please Enter Valid Data</string>
+    <string name="mail_sent">Mail Sent Successfully"</string>
+    <string name="no_user_data">"No User Data"</string>
+    <string name="not_register">You are not registerd,Please signup</string>
+    <string name="wrong_username">You have entered wrong username or password</string>
+    <string name="ups_data">UPS data cant be empty</string>
+    <string name="rack_data">RackNo cant be empty</string>
+    <string name="slave_data">SlaveNo cant be empty</string>
+    <string name="slave_type_empty">SlaveType cant be empty</string>
 
     <string name="client_name">Client Name</string>
     <string name="plant_name">Plant Name</string>

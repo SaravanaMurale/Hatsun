@@ -97,9 +97,9 @@ public class SigninActivity extends AppCompatActivity {
 
 
                 }else if(userResponseDTO.getResponseCode().equals("500")){
-                    ToastUtil.showShortToast(SigninActivity.this,"You are not registerd,Please signup");
+                    ToastUtil.showShortToast(SigninActivity.this,getString(R.string.not_register));
                 }else if(userResponseDTO.getResponseCode().equals("700")){
-                    ToastUtil.showShortToast(SigninActivity.this,"You have entered wrong username or password");
+                    ToastUtil.showShortToast(SigninActivity.this,getString(R.string.wrong_username));
                 }
             }
 

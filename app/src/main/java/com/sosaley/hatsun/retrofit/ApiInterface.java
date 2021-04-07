@@ -44,8 +44,4 @@ public interface ApiInterface {
     Call<UserResponseDTO> getUserDetails(@Body GetUserDTO getUserDTO);
 
 
-
-
-
-
 }

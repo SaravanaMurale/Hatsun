@@ -2,8 +2,6 @@ package com.sosaley.hatsun.utils;
 
 import android.util.Patterns;
 
-import com.sosaley.hatsun.menu.EditActivity;
-
 public class Validation {
 
     public static boolean validateName(String name) {
@@ -69,5 +67,6 @@ public class Validation {
         }
         return true;
     }
+
 
 }

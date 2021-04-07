@@ -107,7 +107,7 @@ public class ProfileActivity extends AppCompatActivity {
                     mobile.setText(userResponseDTO.getUserMobile());
 
                 }else {
-                    ToastUtil.showLongToast(ProfileActivity.this,"No User Data");
+                    ToastUtil.showLongToast(ProfileActivity.this,getString(R.string.no_user_data));
                 }
 
 

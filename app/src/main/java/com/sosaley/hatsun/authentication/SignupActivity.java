@@ -301,7 +301,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 UserResponseDTO userResponseDTO = response.body();
 
                 if (userResponseDTO.getResponseCode().equals("700")) {
-                    ToastUtil.showLongToast(SignupActivity.this, "Your Already Register User,Please Signin");
+                    //ToastUtil.showLongToast(SignupActivity.this, "Your Already Register User,Please Signin");
+
+                    ToastUtil.showLongToast(SignupActivity.this, getString(R.string.reg_user));
+
                 } else if (userResponseDTO.getResponseCode().equals("200")) {
                     System.out.println("ValueInserted");
 

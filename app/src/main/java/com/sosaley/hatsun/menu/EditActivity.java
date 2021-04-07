@@ -83,32 +83,32 @@ public class EditActivity extends AppCompatActivity {
 
                 if(!Validation.validateEmptyData(userEnteredUPS)){
 
-                    ToastUtil.showShortToast(EditActivity.this,"UPS Data ant be empty");
+                    ToastUtil.showShortToast(EditActivity.this,getString(R.string.ups_data));
                     return;
                 }
 
                 if(!Validation.validateEmptyData(userEnteredRackNo)){
 
-                    ToastUtil.showShortToast(EditActivity.this,"RackNo cant be empty");
+                    ToastUtil.showShortToast(EditActivity.this,getString(R.string.rack_data));
                     return;
                 }
 
                 if(!Validation.validateEmptyData(userEnteredSlaveNo)){
 
-                    ToastUtil.showShortToast(EditActivity.this,"SlaveNo cant be empty");
+                    ToastUtil.showShortToast(EditActivity.this,getString(R.string.slave_data));
                     return;
                 }
 
                 if(!Validation.validateEmptyData(userEnteredSlaveType)){
 
-                    ToastUtil.showShortToast(EditActivity.this,"SlaveType cant be empty");
+                    ToastUtil.showShortToast(EditActivity.this,getString(R.string.slave_type_empty));
                     return;
                 }
 
 
                 if(!Validation.validateEditData(userEnteredUPS) || !Validation.validateEditData(userEnteredRackNo) || !Validation.validateEditData(userEnteredSlaveNo) || !Validation.validateEditData(userEnteredSlaveType)){
 
-                    ToastUtil.showLongToast(EditActivity.this,"Please Enter Valid Data");
+                    ToastUtil.showLongToast(EditActivity.this,getString(R.string.enter_valid));
                     return;
 
                 } else if(Validation.validateEditData(userEnteredUPS) && Validation.validateEditData(userEnteredRackNo) && Validation.validateEditData(userEnteredSlaveNo) && Validation.validateEditData(userEnteredSlaveType)){
@@ -205,7 +205,7 @@ public class EditActivity extends AppCompatActivity {
 
                 System.out.println("EditResponse "+baseDTO.getResponseCode());
 
-                ToastUtil.showLongToast(EditActivity.this,"Mail Sent Successfully");
+                ToastUtil.showLongToast(EditActivity.this,getString(R.string.mail_sent));
 
                 new Handler().postDelayed(new Runnable() {
                     @Override

@@ -27,10 +27,7 @@ public class PreferencesUtil {
 
         SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_NAME, Activity.MODE_PRIVATE);
         return preferences.getString(key, null);
-
-
     }
-
 
     public static void setValueSInt(Context context, String key, int value) {
 
