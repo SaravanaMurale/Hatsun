@@ -2,6 +2,7 @@ package com.sosaley.hatsun.menu;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,6 +47,9 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
             System.out.println("ArrayPosition0"+words[0]);
             System.out.println("ArrayPosition1"+words[1]);
             System.out.println("ArrayPosition2"+words[2]);
+            System.out.println("ArrayPosition2"+words[3]);
+
+            Toast.makeText(QRScannerActivity.this,"ScanData"+ words[0]+" "+words[1]+" "+words[2]+" "+words[3],Toast.LENGTH_LONG).show();
 
             /*System.out.println("ArrayPosition0"+words[0]);
             System.out.println("ArrayPosition1"+words[1]);
