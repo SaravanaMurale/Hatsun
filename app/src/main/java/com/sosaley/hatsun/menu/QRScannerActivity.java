@@ -39,9 +39,13 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
 
         String[] words = scannedResult.split(":");
 
-        for (int i = 0; i < words.length; i++) {
+        for (int i = 0; i < 1; i++) {
 
             System.out.println("ArraySize" + words.length);
+
+            System.out.println("ArrayPosition0"+words[0]);
+            System.out.println("ArrayPosition1"+words[1]);
+            System.out.println("ArrayPosition2"+words[2]);
 
             /*System.out.println("ArrayPosition0"+words[0]);
             System.out.println("ArrayPosition1"+words[1]);
@@ -52,14 +56,14 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
             System.out.println("ArrayPosition6"+words[6]);
             System.out.println("ArrayPosition7"+words[7]);*/
 
-            QRDisplayActivity.clientName.setText(words[1]);
+            /*QRDisplayActivity.clientName.setText(words[1]);
             QRDisplayActivity.plantName.setText(words[2]);
             QRDisplayActivity.batteryId.setText(words[3]);
             QRDisplayActivity.batteryRoomNo.setText(words[4]);
             QRDisplayActivity.upsNo.setText(words[5]);
             QRDisplayActivity.rackNo.setText(words[6]);
             QRDisplayActivity.slaveNo.setText(words[7]);
-            QRDisplayActivity.slaveType.setText(words[8]);
+            QRDisplayActivity.slaveType.setText(words[8]);*/
 
 
             /*System.out.println("7th position"+words[7]);
