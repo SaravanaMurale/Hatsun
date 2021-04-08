@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -20,6 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sosaley.hatsun.R;
 import com.sosaley.hatsun.authentication.SigninActivity;
+import com.sosaley.hatsun.model.BaseDTO;
+import com.sosaley.hatsun.model.IssuePostDTO;
+import com.sosaley.hatsun.model.IssuePostList;
 import com.sosaley.hatsun.model.ValidateBatteryDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
@@ -27,6 +31,9 @@ import com.sosaley.hatsun.utils.AppConstant;
 import com.sosaley.hatsun.utils.MathUtil;
 import com.sosaley.hatsun.utils.PermissionUtils;
 import com.sosaley.hatsun.utils.PreferencesUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,6 +54,9 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
     TextView dataSync;
 
     private String client_Name,plant_Name,battery_Id,battety_Room_No,ups_No,rack_No,slave_No,slave_Type;
+
+    Button btnSubmit;
+    EditText descEdit;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,9 +114,59 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                 popupMenu.show();
             }
         });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String description=descEdit.getText().toString();
+
+                sendDescriptionToServer(description);
+
+
+            }
+        });
+
     }
 
+    private void sendDescriptionToServer(String description) {
+        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
 
+        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,"8");
+
+        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
+        issuePostDTOList.add(issuePostDTO);
+
+        IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
+
+        String token="Basic c3Jpbmk6U3JpbmlAMTIz";
+
+        Call<BaseDTO> call=apiInterface.postIssue(token,issuePostList);
+        call.enqueue(new Callback<BaseDTO>() {
+            @Override
+            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+
+
+
+
+                System.out.println("ResponseSuccess"+response.code());
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseDTO> call, Throwable t) {
+
+                System.out.println("Exception"+t.getMessage().toString());
+
+            }
+        });
+
+
+
+
+
+
+    }
 
 
     private void syncScannedDataWithServer() {
@@ -311,6 +371,11 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         rackNo = (TextView) findViewById(R.id.rack);
         slaveNo = (TextView) findViewById(R.id.slave);
         slaveType = (TextView) findViewById(R.id.slaveType);
+
+        btnSubmit=(Button)findViewById(R.id.btnSubmit);
+        descEdit=(EditText)findViewById(R.id.descriptionOfIssue);
+
+
 
     }
 }

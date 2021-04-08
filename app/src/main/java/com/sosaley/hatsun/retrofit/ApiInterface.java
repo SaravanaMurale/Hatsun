@@ -2,6 +2,7 @@ package com.sosaley.hatsun.retrofit;
 
 import com.sosaley.hatsun.model.BaseDTO;
 import com.sosaley.hatsun.model.GetUserDTO;
+import com.sosaley.hatsun.model.IssuePostList;
 import com.sosaley.hatsun.model.LoginDTO;
 import com.sosaley.hatsun.model.ResetPasswordDTO;
 import com.sosaley.hatsun.model.UserDTO;
@@ -12,6 +13,8 @@ import com.sosaley.hatsun.utils.AppConstant;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -42,6 +45,10 @@ public interface ApiInterface {
 
     @POST(AppConstant.DOMAIN+"/")
     Call<UserResponseDTO> getUserDetails(@Body GetUserDTO getUserDTO);
+
+    @Headers({"Content-Type:application/json"})
+    @POST(AppConstant.REDMINE_DOMAIN+"issues.json")
+    Call<BaseDTO> postIssue(@Header("Authorization") String token, @Body IssuePostList issuePostList);
 
 
 }
