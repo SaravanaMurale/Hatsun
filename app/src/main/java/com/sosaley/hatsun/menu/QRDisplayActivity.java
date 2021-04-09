@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -139,7 +140,14 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
         IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
 
-        String token="Basic c3Jpbmk6U3JpbmlAMTIz";
+
+
+        //String token="Basic c3Jpbmk6U3JpbmlAMTIz";
+        String token="Basic 008111fded86fc249e6e2cbfc5aecb9960d85ef3";
+        String userName="srini";
+        String password="Srini@123";
+
+       // String authToken="Basic "+ Base64.encodeToString(userName:password);
 
         Call<BaseDTO> call=apiInterface.postIssue(token,issuePostList);
         call.enqueue(new Callback<BaseDTO>() {
@@ -150,6 +158,8 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
 
                 System.out.println("ResponseSuccess"+response.code());
+                System.out.println("ResponseMessage"+response.message().toString());
+                System.out.println("ResponseErrorBody"+response.errorBody().toString());
 
             }
 

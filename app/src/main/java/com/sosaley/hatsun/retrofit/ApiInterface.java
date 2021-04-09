@@ -13,6 +13,8 @@ import com.sosaley.hatsun.utils.AppConstant;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -48,7 +50,7 @@ public interface ApiInterface {
 
     @Headers({"Content-Type:application/json"})
     @POST(AppConstant.REDMINE_DOMAIN+"issues.json")
-    Call<BaseDTO> postIssue(@Header("Authorization") String token, @Body IssuePostList issuePostList);
+    Call<BaseDTO> postIssue( @Header("Authorization") String token ,@Body IssuePostList issuePostList);
 
 
 }
