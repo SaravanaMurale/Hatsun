@@ -50,7 +50,7 @@ public interface ApiInterface {
 
     @Headers({"Content-Type:application/json"})
     @POST(AppConstant.REDMINE_DOMAIN+"issues.json")
-    Call<BaseDTO> postIssue( @Header("Authorization") String token ,@Body IssuePostList issuePostList);
+    Call<BaseDTO> postIssue(@Body IssuePostList issuePostList);
 
 
 }

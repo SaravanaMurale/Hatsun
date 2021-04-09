@@ -149,12 +149,10 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
        // String authToken="Basic "+ Base64.encodeToString(userName:password);
 
-        Call<BaseDTO> call=apiInterface.postIssue(token,issuePostList);
+        Call<BaseDTO> call=apiInterface.postIssue(issuePostList);
         call.enqueue(new Callback<BaseDTO>() {
             @Override
             public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
-
-
 
 
                 System.out.println("ResponseSuccess"+response.code());
