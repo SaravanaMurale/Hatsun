@@ -21,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
+    static String token="008111fded86fc249e6e2cbfc5aecb9960d85ef3";
     @SuppressLint("NewApi")
 
     private static String AUTH = "Basic " + Base64.encodeToString(("srini:Srini@123").getBytes(),Base64.NO_WRAP);
@@ -44,6 +45,7 @@ public class ApiClient {
                             Request original=chain.request();
                             Request.Builder requestBuilder=original.newBuilder()
                                     .addHeader("Authorization",AUTH)
+                                    .addHeader("Authorization","Bearer " + token)
                                     .method(original.method(),original.body());
 
                             Request request=requestBuilder.build();

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +27,7 @@ import com.sosaley.hatsun.model.IssuePostList;
 import com.sosaley.hatsun.model.ValidateBatteryDTO;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
+import com.sosaley.hatsun.redmine.SimplifiedRetrofit;
 import com.sosaley.hatsun.utils.AppConstant;
 import com.sosaley.hatsun.utils.MathUtil;
 import com.sosaley.hatsun.utils.PermissionUtils;
@@ -122,13 +122,49 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
                 String description=descEdit.getText().toString();
 
-                sendDescriptionToServer(description);
+                //sendDescriptionToServer(description);
+
+                sendSimplifiedRequest(description);
 
 
             }
         });
 
     }
+
+    private void sendSimplifiedRequest(String description) {
+
+        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,"8");
+
+        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
+        issuePostDTOList.add(issuePostDTO);
+
+        IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
+
+        Call<BaseDTO> call = SimplifiedRetrofit
+                .getInstance()
+                .getApi().postIssue(issuePostList);
+
+        call.enqueue(new Callback<BaseDTO>() {
+            @Override
+            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+
+                System.out.println("ResponseSuccess"+response.code());
+                System.out.println("ResponseMessage"+response.message().toString());
+                System.out.println("ResponseErrorBody"+response.errorBody().toString());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseDTO> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
 
     private void sendDescriptionToServer(String description) {
         ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
@@ -149,7 +185,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
        // String authToken="Basic "+ Base64.encodeToString(userName:password);
 
-        Call<BaseDTO> call=apiInterface.postIssue(issuePostList);
+        /*Call<BaseDTO> call=apiInterface.postIssue(issuePostList);
         call.enqueue(new Callback<BaseDTO>() {
             @Override
             public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
@@ -167,7 +203,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                 System.out.println("Exception"+t.getMessage().toString());
 
             }
-        });
+        });*/
 
 
 
