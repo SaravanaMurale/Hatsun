@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.sosaley.hatsun.R;
 import com.sosaley.hatsun.model.BaseDTO;
@@ -47,7 +48,7 @@ public class RedmineActivity extends AppCompatActivity {
 
     private void sendRedmineDetailsToServer() {
 
-        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,"8");
+        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",8);
 
         List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
         issuePostDTOList.add(issuePostDTO);
@@ -62,6 +63,7 @@ public class RedmineActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
 
+                Toast.makeText(RedmineActivity.this,response.message()+" "+response.code(),Toast.LENGTH_LONG).show();
 
                 System.out.println("ResponseDetails "+response.message());
                 System.out.println("ResponseDetails "+response.code());

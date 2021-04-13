@@ -94,7 +94,6 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
                 if (!PermissionUtils.hasPermission(QRDisplayActivity.this, Manifest.permission.CAMERA)) {
 
-
                     PermissionUtils.requestPermissions(QRDisplayActivity.this, new String[]{Manifest.permission.CAMERA}, AppConstant.CAMERA_ACCESS);
 
                 } else {
@@ -124,7 +123,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
                 //sendDescriptionToServer(description);
 
-                sendSimplifiedRequest(description);
+               // sendSimplifiedRequest(description);
 
 
             }
@@ -132,9 +131,9 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
     }
 
-    private void sendSimplifiedRequest(String description) {
+    /*private void sendSimplifiedRequest(String description) {
 
-        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,"8");
+        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,8);
 
         List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
         issuePostDTOList.add(issuePostDTO);
@@ -163,13 +162,13 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         });
 
 
-    }
+    }*/
 
 
-    private void sendDescriptionToServer(String description) {
+   /* private void sendDescriptionToServer(String description) {
         ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
 
-        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,"8");
+        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,8);
 
         List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
         issuePostDTOList.add(issuePostDTO);
@@ -185,7 +184,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
        // String authToken="Basic "+ Base64.encodeToString(userName:password);
 
-        /*Call<BaseDTO> call=apiInterface.postIssue(issuePostList);
+        *//*Call<BaseDTO> call=apiInterface.postIssue(issuePostList);
         call.enqueue(new Callback<BaseDTO>() {
             @Override
             public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
@@ -203,14 +202,14 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                 System.out.println("Exception"+t.getMessage().toString());
 
             }
-        });*/
+        });*//*
 
 
 
 
 
 
-    }
+    }*/
 
 
     private void syncScannedDataWithServer() {

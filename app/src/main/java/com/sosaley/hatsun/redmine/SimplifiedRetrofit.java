@@ -5,6 +5,7 @@ import android.util.Base64;
 import com.sosaley.hatsun.retrofit.ApiInterface;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -15,7 +16,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SimplifiedRetrofit {
 
-    private static final String AUTH = "Basic " + Base64.encodeToString(("srini:Srini@123").getBytes(), Base64.NO_WRAP);
+    /*public BasicAuthInterceptor(String user, String password) {
+        this.credentials = Credentials.basic(user, password);
+    }*/
+
+
+
+
+    String AUTH = "Basic " + Base64.encodeToString(("srini:Srini@123").getBytes(), Base64.NO_WRAP);
+
 
     private static final String BASE_URL = "http://redmine.sosaley.co.in:83/";
     private static SimplifiedRetrofit mInstance;

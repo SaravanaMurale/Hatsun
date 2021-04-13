@@ -6,24 +6,28 @@ public class IssuePostDTO {
 
     @SerializedName("project_id")
     private int projectId;
+
     @SerializedName("subject")
     private String subject;
+
     @SerializedName("priority_id")
     private int priorityId;
+
     @SerializedName("description")
     private String description;
-    @SerializedName("is_private")
-    private boolean isPrivate;
+
+    /*@SerializedName("is_private")
+    private int isPrivate;*/
+
     @SerializedName("estimated_hours")
-    private String estimatedHours;
+    private int estimatedHours;
 
-
-    public IssuePostDTO(int projectId, String subject, int priorityId, String description, boolean isPrivate, String estimatedHours) {
+    public IssuePostDTO(int projectId, String subject, int priorityId, String description, int estimatedHours) {
         this.projectId = projectId;
         this.subject = subject;
         this.priorityId = priorityId;
         this.description = description;
-        this.isPrivate = isPrivate;
+
         this.estimatedHours = estimatedHours;
     }
 
@@ -59,19 +63,12 @@ public class IssuePostDTO {
         this.description = description;
     }
 
-    public boolean isPrivate() {
-        return isPrivate;
-    }
 
-    public void setPrivate(boolean aPrivate) {
-        isPrivate = aPrivate;
-    }
-
-    public String getEstimatedHours() {
+    public int getEstimatedHours() {
         return estimatedHours;
     }
 
-    public void setEstimatedHours(String estimatedHours) {
+    public void setEstimatedHours(int estimatedHours) {
         this.estimatedHours = estimatedHours;
     }
 }
