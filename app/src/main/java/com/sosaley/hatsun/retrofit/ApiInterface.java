@@ -46,7 +46,7 @@ public interface ApiInterface {
     Call<UserResponseDTO> getUserDetails(@Body GetUserDTO getUserDTO);
 
     @Headers({"Content-Type:application/json"})
-    @POST(AppConstant.REDMINE_DOMAIN+"issues.json")
+    @POST(AppConstant.LOCAL_SERVER+"issues.json")
     Call<BaseDTO> postIssue(@Body IssuePostList issuePostList);
 
 

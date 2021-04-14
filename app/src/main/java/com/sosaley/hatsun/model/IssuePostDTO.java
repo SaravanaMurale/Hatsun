@@ -62,8 +62,6 @@ public class IssuePostDTO {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
     public int getEstimatedHours() {
         return estimatedHours;
     }

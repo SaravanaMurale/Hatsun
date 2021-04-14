@@ -73,6 +73,8 @@ public class RedmineActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<BaseDTO> call, Throwable t) {
 
+                System.out.println("Exception"+t.getMessage().toString());
+
             }
         });
 
