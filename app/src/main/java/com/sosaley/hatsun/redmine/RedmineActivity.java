@@ -1,34 +1,24 @@
 package com.sosaley.hatsun.redmine;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.sosaley.hatsun.R;
-import com.sosaley.hatsun.model.BaseDTO;
-import com.sosaley.hatsun.model.IssuePostDTO;
-import com.sosaley.hatsun.model.IssuePostList;
 import com.sosaley.hatsun.retrofit.ApiClient;
-import com.sosaley.hatsun.retrofit.ApiInterface;
-import com.sosaley.hatsun.utils.AppConstant;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class RedmineActivity extends AppCompatActivity {
 
@@ -96,6 +86,9 @@ public class RedmineActivity extends AppCompatActivity {
                                 .addHeader("Authorization",ApiClient.AUTH )
                                 .build();
                         Response response = client.newCall(request).execute();
+
+                        System.out.println("Response"+response.body().toString());
+
                         Log.i(ContentValues.TAG, "response::"+response.body().string());
 
                     } catch (IOException e) {
