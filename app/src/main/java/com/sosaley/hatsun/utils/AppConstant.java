@@ -11,7 +11,7 @@ public class AppConstant {
 
     public static final String REDMINE_DOMAIN="http://redmine.sosaley.co.in:83/";
 
-    public static final String LOCAL_SERVER="http://192.168.0.23:80/redmine/";
+    public static final String LOCAL_SERVER="http://192.168.0.23:80/redmine/users/";
 
 
 }

@@ -12,6 +12,8 @@ import com.sosaley.hatsun.R;
 import com.sosaley.hatsun.model.BaseDTO;
 import com.sosaley.hatsun.model.IssuePostDTO;
 import com.sosaley.hatsun.model.IssuePostList;
+import com.sosaley.hatsun.retrofit.ApiClient;
+import com.sosaley.hatsun.retrofit.ApiInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ import retrofit2.Response;
 public class RedmineActivity extends AppCompatActivity {
 
     EditText getEditData;
-    Button btnRedmineSubmit;
+    Button btnRedmineSubmit,getUser;
 
 
     @Override
@@ -33,6 +35,18 @@ public class RedmineActivity extends AppCompatActivity {
 
         getEditData=(EditText)findViewById(R.id.getEditData);
         btnRedmineSubmit=(Button)findViewById(R.id.btnRedmineSubmit);
+        getUser=(Button)findViewById(R.id.getUser);
+
+        getUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //getUserDetails();
+
+                getUserDetailsWithoutUserNameAndPass();
+
+            }
+        });
 
 
         btnRedmineSubmit.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +54,56 @@ public class RedmineActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 sendRedmineDetailsToServer();
+
+            }
+        });
+
+    }
+
+    private void getUserDetailsWithoutUserNameAndPass() {
+
+        String token="Basic YWRtaW46YWRtaW5AMTIz";
+
+        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+
+        Call<BaseDTO> call=apiInterface.getUserDetailsWithUserAndPass(token);
+        call.enqueue(new Callback<BaseDTO>() {
+            @Override
+            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+
+                System.out.println("ResponseDetails "+response.code());
+                System.out.println("ResponseDetails "+response.message());
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseDTO> call, Throwable t) {
+
+            }
+        });
+
+
+
+
+    }
+
+    private void getUserDetails() {
+
+        Call<BaseDTO> call = SimplifiedRetrofit
+                .getInstance()
+                .getApi().getUserDetails();
+
+        call.enqueue(new Callback<BaseDTO>() {
+            @Override
+            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+
+                System.out.println("GetUserDetails "+response.code());
+                System.out.println("GetUserDetails "+response.message());
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseDTO> call, Throwable t) {
 
             }
         });
