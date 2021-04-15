@@ -48,6 +48,8 @@ public class RedmineActivity extends AppCompatActivity {
 
     private void sendRedmineDetailsToServer() {
 
+        String token="Basic c3Jpbmk6U3JpbmlAMTIz";
+
         IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",8);
 
         List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
@@ -57,7 +59,7 @@ public class RedmineActivity extends AppCompatActivity {
 
         Call<BaseDTO> call = SimplifiedRetrofit
                 .getInstance()
-                .getApi().postIssue(issuePostList);
+                .getApi().postIssue(token,issuePostList);
 
         call.enqueue(new Callback<BaseDTO>() {
             @Override

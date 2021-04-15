@@ -20,9 +20,8 @@ public class SimplifiedRetrofit {
         this.credentials = Credentials.basic(user, password);
     }*/
 
-    String AUTH = "Basic " + Base64.encodeToString(("admin:admin@123").getBytes(), Base64.NO_WRAP);
-
-
+    String auth = "Basic " + Base64.encodeToString(("admin:admin@123").getBytes(), Base64.NO_WRAP);
+    //String auth = "password:'Srini@123', username:'srini'";
     //private static final String BASE_URL = "http://redmine.sosaley.co.in:83/";
     private static SimplifiedRetrofit mInstance;
     private Retrofit retrofit;
@@ -37,7 +36,7 @@ public class SimplifiedRetrofit {
                                 Request original = chain.request();
 
                                 Request.Builder requestBuilder = original.newBuilder()
-                                        .addHeader("Authorization", AUTH)
+                                        .addHeader("auth", auth)
                                         .method(original.method(), original.body());
 
                                 Request request = requestBuilder.build();

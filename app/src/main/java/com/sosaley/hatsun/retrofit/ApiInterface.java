@@ -13,6 +13,7 @@ import com.sosaley.hatsun.utils.AppConstant;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -47,7 +48,7 @@ public interface ApiInterface {
 
     @Headers({"Content-Type:application/json"})
     @POST(AppConstant.LOCAL_SERVER+"issues.json")
-    Call<BaseDTO> postIssue(@Body IssuePostList issuePostList);
+    Call<BaseDTO> postIssue(@Header("Authorization") String auth, @Body IssuePostList issuePostList);
 
 
 }
