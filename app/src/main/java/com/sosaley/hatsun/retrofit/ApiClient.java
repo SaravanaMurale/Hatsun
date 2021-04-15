@@ -24,7 +24,7 @@ public class ApiClient {
     static String token="008111fded86fc249e6e2cbfc5aecb9960d85ef3";
     @SuppressLint("NewApi")
 
-    private static String AUTH = "Basic " + Base64.encodeToString(("admin:admin@123").getBytes(),Base64.NO_WRAP);
+    public static String AUTH = "Basic " + Base64.encodeToString(("admin:admin@123").getBytes(),Base64.NO_WRAP);
     //public static String AUTH="Basic"+ Base64.getEncoder().encodeToString("srini:Srini@123").getBytes();
 
     public static Retrofit retrofit = null;
@@ -38,13 +38,13 @@ public class ApiClient {
         if (retrofit == null) {
 
             OkHttpClient okHttpClient =   new OkHttpClient.Builder()
-                    /*.addInterceptor(new Interceptor() {
+                    .addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
 
                             Request original=chain.request();
                             Request.Builder requestBuilder=original.newBuilder()
-                                    .addHeader("Authorization",AUTH)
+//                                    .addHeader("Authorization",AUTH)
                                    // .addHeader("Authorization","Basic " + token)
                                     .method(original.method(),original.body());
 
@@ -52,7 +52,7 @@ public class ApiClient {
 
                             return chain.proceed(request);
                         }
-                    })*/
+                    })
                     .retryOnConnectionFailure(true)
                     .connectTimeout(60, TimeUnit.SECONDS)
                     .readTimeout(60, TimeUnit.SECONDS)
@@ -60,7 +60,7 @@ public class ApiClient {
                     .build();
 
 
-            retrofit = new Retrofit.Builder().baseUrl(AppConstant.LOCAL_SERVER)
+            retrofit = new Retrofit.Builder().baseUrl(AppConstant.LOCAL_SERVER_ISSUE_POST)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(okHttpClient)
                     .build();

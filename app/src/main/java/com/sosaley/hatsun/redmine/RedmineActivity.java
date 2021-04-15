@@ -2,7 +2,9 @@ package com.sosaley.hatsun.redmine;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +16,19 @@ import com.sosaley.hatsun.model.IssuePostDTO;
 import com.sosaley.hatsun.model.IssuePostList;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
+import com.sosaley.hatsun.utils.AppConstant;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RedmineActivity extends AppCompatActivity {
 
@@ -43,7 +51,7 @@ public class RedmineActivity extends AppCompatActivity {
 
                 //getUserDetails();
 
-                getUserDetailsWithoutUserNameAndPass();
+                //getUserDetailsWithoutUserNameAndPass();
 
             }
         });
@@ -53,97 +61,143 @@ public class RedmineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                sendRedmineDetailsToServer();
+                //sendRedmineDetailsToServer();
+
+                sendRedmineIssueDetailsOKHTTP();
+
+
 
             }
         });
 
     }
 
-    private void getUserDetailsWithoutUserNameAndPass() {
+    private void sendRedmineIssueDetailsOKHTTP() {
 
-        String token="Basic YWRtaW46YWRtaW5AMTIz";
 
-        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+        Thread timer = new Thread() {
+            public void run() {
+                try {
+                    sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        OkHttpClient client = new OkHttpClient().newBuilder()
+                                .build();
+                        MediaType mediaType = MediaType.parse("application/json");
+                        RequestBody body = RequestBody.create(mediaType,
+                                "{\n  \"issue\": {\n    \"project_id\": 1,\n    \"subject\": \"Project 1 post\",\n    \"priority_id\": 4,\n    \"description\":\"Description\",\n    \"is_private\":false,\n    \"estimated_hours\":\"8\"\n  }\n}");
+                        Request request = new Request.Builder()
+                               // .url("http://redmine.sosaley.co.in:83/issues.json")
+                                .url("http://192.168.0.23:80/redmine/issues.json")
+                                .method("POST", body)
+                                .addHeader("Content-Type", "application/json")
+                                .addHeader("Authorization",ApiClient.AUTH )
+                                .build();
+                        Response response = client.newCall(request).execute();
+                        Log.i(ContentValues.TAG, "response::"+response.body().string());
 
-        Call<BaseDTO> call=apiInterface.getUserDetailsWithUserAndPass(token);
-        call.enqueue(new Callback<BaseDTO>() {
-            @Override
-            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
-
-                System.out.println("ResponseDetails "+response.code());
-                System.out.println("ResponseDetails "+response.message());
-
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-
-            @Override
-            public void onFailure(Call<BaseDTO> call, Throwable t) {
-
-            }
-        });
-
-
+        };
+        timer.start();
 
 
     }
 
-    private void getUserDetails() {
+//    private void getUserDetailsWithoutUserNameAndPass() {
+//
+//        String token="Basic b6e957bce7820f60453eb2403a67bd35b7a994de";
+//
+//        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+//
+//        Call<BaseDTO> call=apiInterface.getUserDetailsWithUserAndPass(token);
+//        call.enqueue(new Callback<BaseDTO>() {
+//            @Override
+//            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+//
+//                System.out.println("ResponseDetails "+response.code());
+//                System.out.println("ResponseDetails "+response.message());
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<BaseDTO> call, Throwable t) {
+//
+//            }
+//        });
+//
+//
+//
+//
+//    }
 
-        Call<BaseDTO> call = SimplifiedRetrofit
-                .getInstance()
-                .getApi().getUserDetails();
+//    private void getUserDetails() {
+//
+//        Call<BaseDTO> call = SimplifiedRetrofit
+//                .getInstance()
+//                .getApi().getUserDetails();
+//
+//        call.enqueue(new Callback<BaseDTO>() {
+//            @Override
+//            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+//
+//                System.out.println("GetUserDetails "+response.code());
+//                System.out.println("GetUserDetails "+response.message());
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<BaseDTO> call, Throwable t) {
+//
+//            }
+//        });
+//
+//    }
 
-        call.enqueue(new Callback<BaseDTO>() {
-            @Override
-            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
-
-                System.out.println("GetUserDetails "+response.code());
-                System.out.println("GetUserDetails "+response.message());
-
-            }
-
-            @Override
-            public void onFailure(Call<BaseDTO> call, Throwable t) {
-
-            }
-        });
-
-    }
-
-    private void sendRedmineDetailsToServer() {
-
-        String token="Basic c3Jpbmk6U3JpbmlAMTIz";
-
-        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",8);
-
-        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
-        issuePostDTOList.add(issuePostDTO);
-
-        IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
-
-        Call<BaseDTO> call = SimplifiedRetrofit
-                .getInstance()
-                .getApi().postIssue(token,issuePostList);
-
-        call.enqueue(new Callback<BaseDTO>() {
-            @Override
-            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
-
-                Toast.makeText(RedmineActivity.this,response.message()+" "+response.code(),Toast.LENGTH_LONG).show();
-
-                System.out.println("ResponseDetails "+response.message());
-                System.out.println("ResponseDetails "+response.code());
-                System.out.println("ResponseDetails "+response.errorBody());
-            }
-
-            @Override
-            public void onFailure(Call<BaseDTO> call, Throwable t) {
-
-                System.out.println("Exception"+t.getMessage().toString());
-
-            }
-        });
-
-
-    }
+//    private void sendRedmineDetailsToServer() {
+//
+//        //String token="Basic c3Jpbmk6U3JpbmlAMTIz";
+//        String token="b6e957bce7820f60453eb2403a67bd35b7a994de";
+//
+//        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",8);
+//
+//        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
+//        issuePostDTOList.add(issuePostDTO);
+//
+//        IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
+//
+//        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+//
+//        Call<BaseDTO> call=apiInterface.postIssue(token,issuePostList);
+//
+//        /*Call<BaseDTO> call = SimplifiedRetrofit
+//                .getInstance()
+//                .getApi().postIssue(token,issuePostList);*/
+//
+//        call.enqueue(new Callback<BaseDTO>() {
+//            @Override
+//            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+//
+//                Toast.makeText(RedmineActivity.this,response.message()+" "+response.code(),Toast.LENGTH_LONG).show();
+//
+//                System.out.println("ResponseDetails "+response.message());
+//                System.out.println("ResponseDetails "+response.code());
+//                System.out.println("ResponseDetails "+response.errorBody());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<BaseDTO> call, Throwable t) {
+//
+//                System.out.println("Exception"+t.getMessage().toString());
+//
+//            }
+//        });
+//
+//
+//    }
 }

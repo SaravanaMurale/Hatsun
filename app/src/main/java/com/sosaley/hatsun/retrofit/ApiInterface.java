@@ -48,8 +48,8 @@ public interface ApiInterface {
     Call<UserResponseDTO> getUserDetails(@Body GetUserDTO getUserDTO);
 
     @Headers({"Content-Type:application/json"})
-    @POST(AppConstant.LOCAL_SERVER+"issues.json")
-    Call<BaseDTO> postIssue(@Header("Authorization") String auth, @Body IssuePostList issuePostList);
+    @POST(AppConstant.LOCAL_SERVER_ISSUE_POST+"issues.json")
+    Call<BaseDTO> postIssue(@Header("Authorization") String token,  @Body IssuePostList issuePostList);
 
     @GET(AppConstant.LOCAL_SERVER+"current.json")
     Call<BaseDTO> getUserDetails();
