@@ -1,24 +1,27 @@
 package com.sosaley.hatsun.redmine;
 
-import android.content.ContentValues;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sosaley.hatsun.R;
+import com.sosaley.hatsun.model.BaseDTO;
+import com.sosaley.hatsun.model.IssuePostDTO;
+import com.sosaley.hatsun.model.IssuePostList;
 import com.sosaley.hatsun.retrofit.ApiClient;
+import com.sosaley.hatsun.retrofit.ApiInterface;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class RedmineActivity extends AppCompatActivity {
 
@@ -51,9 +54,9 @@ public class RedmineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //sendRedmineDetailsToServer();
+                sendRedmineDetailsToServer();
 
-                sendRedmineIssueDetailsOKHTTP();
+                //sendRedmineIssueDetailsOKHTTP();
 
 
 
@@ -62,7 +65,7 @@ public class RedmineActivity extends AppCompatActivity {
 
     }
 
-    private void sendRedmineIssueDetailsOKHTTP() {
+   /* private void sendRedmineIssueDetailsOKHTTP() {
 
 
         Thread timer = new Thread() {
@@ -100,7 +103,7 @@ public class RedmineActivity extends AppCompatActivity {
         timer.start();
 
 
-    }
+    }*/
 
 //    private void getUserDetailsWithoutUserNameAndPass() {
 //
@@ -152,45 +155,45 @@ public class RedmineActivity extends AppCompatActivity {
 //
 //    }
 
-//    private void sendRedmineDetailsToServer() {
-//
-//        //String token="Basic c3Jpbmk6U3JpbmlAMTIz";
-//        String token="b6e957bce7820f60453eb2403a67bd35b7a994de";
-//
-//        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",8);
-//
-//        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
-//        issuePostDTOList.add(issuePostDTO);
-//
-//        IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
-//
-//        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
-//
-//        Call<BaseDTO> call=apiInterface.postIssue(token,issuePostList);
-//
-//        /*Call<BaseDTO> call = SimplifiedRetrofit
-//                .getInstance()
-//                .getApi().postIssue(token,issuePostList);*/
-//
-//        call.enqueue(new Callback<BaseDTO>() {
-//            @Override
-//            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
-//
-//                Toast.makeText(RedmineActivity.this,response.message()+" "+response.code(),Toast.LENGTH_LONG).show();
-//
-//                System.out.println("ResponseDetails "+response.message());
-//                System.out.println("ResponseDetails "+response.code());
-//                System.out.println("ResponseDetails "+response.errorBody());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<BaseDTO> call, Throwable t) {
-//
-//                System.out.println("Exception"+t.getMessage().toString());
-//
-//            }
-//        });
-//
-//
-//    }
+    private void sendRedmineDetailsToServer() {
+
+        //String token="Basic c3Jpbmk6U3JpbmlAMTIz";
+        String token="b6e957bce7820f60453eb2403a67bd35b7a994de";
+
+        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",8);
+
+        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
+        issuePostDTOList.add(issuePostDTO);
+
+        IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
+
+        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+
+        Call<BaseDTO> call=apiInterface.postIssue(ApiClient.AUTH,issuePostList);
+
+        /*Call<BaseDTO> call = SimplifiedRetrofit
+                .getInstance()
+                .getApi().postIssue(token,issuePostList);*/
+
+        call.enqueue(new Callback<BaseDTO>() {
+            @Override
+            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+
+                Toast.makeText(RedmineActivity.this,response.message()+" "+response.code(),Toast.LENGTH_LONG).show();
+
+                System.out.println("ResponseDetails "+response.message());
+                System.out.println("ResponseDetails "+response.code());
+                System.out.println("ResponseDetails "+response.errorBody());
+            }
+
+            @Override
+            public void onFailure(Call<BaseDTO> call, Throwable t) {
+
+                System.out.println("Exception"+t.getMessage().toString());
+
+            }
+        });
+
+
+    }
 }

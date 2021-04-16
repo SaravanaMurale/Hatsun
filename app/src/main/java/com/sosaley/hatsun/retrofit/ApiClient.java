@@ -38,21 +38,21 @@ public class ApiClient {
         if (retrofit == null) {
 
             OkHttpClient okHttpClient =   new OkHttpClient.Builder()
-                    .addInterceptor(new Interceptor() {
+                    /*.addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
 
                             Request original=chain.request();
                             Request.Builder requestBuilder=original.newBuilder()
-//                                    .addHeader("Authorization",AUTH)
-                                   // .addHeader("Authorization","Basic " + token)
+                                    .addHeader("Authorization",AUTH)
+                                    .addHeader("Authorization","Basic " + token)
                                     .method(original.method(),original.body());
 
                             Request request=requestBuilder.build();
 
                             return chain.proceed(request);
                         }
-                    })
+                    })*/
                     .retryOnConnectionFailure(true)
                     .connectTimeout(60, TimeUnit.SECONDS)
                     .readTimeout(60, TimeUnit.SECONDS)
