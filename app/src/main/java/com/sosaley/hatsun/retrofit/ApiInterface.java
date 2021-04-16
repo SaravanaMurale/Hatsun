@@ -2,6 +2,7 @@ package com.sosaley.hatsun.retrofit;
 
 import com.sosaley.hatsun.model.BaseDTO;
 import com.sosaley.hatsun.model.GetUserDTO;
+import com.sosaley.hatsun.model.IssuePostDTO;
 import com.sosaley.hatsun.model.IssuePostList;
 import com.sosaley.hatsun.model.LoginDTO;
 import com.sosaley.hatsun.model.ResetPasswordDTO;
@@ -9,6 +10,8 @@ import com.sosaley.hatsun.model.UserDTO;
 import com.sosaley.hatsun.model.UserResponseDTO;
 import com.sosaley.hatsun.model.ValidateBatteryDTO;
 import com.sosaley.hatsun.utils.AppConstant;
+
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -49,13 +52,14 @@ public interface ApiInterface {
 
     @Headers({"Content-Type:application/json"})
     @POST(AppConstant.LOCAL_SERVER_ISSUE_POST+"issues.json")
-    Call<BaseDTO> postIssue(@Header("Authorization") String token,  @Body IssuePostList issuePostList);
+    Call<BaseDTO> postIssue(@Header("Authorization") String token,@Header("Authorization") String token1,  @Body List<IssuePostDTO> issuePostList);
 
     @GET(AppConstant.LOCAL_SERVER+"current.json")
     Call<BaseDTO> getUserDetails();
 
     @GET(AppConstant.LOCAL_SERVER+"current.json")
     Call<BaseDTO> getUserDetailsWithUserAndPass(@Header("Authorization") String auth);
+
 
 
 

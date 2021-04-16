@@ -22,6 +22,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/*import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;*/
+
 
 public class RedmineActivity extends AppCompatActivity {
 
@@ -54,9 +62,11 @@ public class RedmineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                sendRedmineDetailsToServer();
+                //sendRedmineDetailsToServer();
 
                 //sendRedmineIssueDetailsOKHTTP();
+
+                sendRedmineDetailstoServerForRetrofitAPI();
 
 
 
@@ -155,7 +165,42 @@ public class RedmineActivity extends AppCompatActivity {
 //
 //    }
 
-    private void sendRedmineDetailsToServer() {
+
+    void sendRedmineDetailstoServerForRetrofitAPI(){
+
+        String token="b6e957bce7820f60453eb2403a67bd35b7a994de";
+
+        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject",1,"Description",8);
+
+        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
+
+        issuePostDTOList.add(issuePostDTO);
+
+        ApiInterface apiInterface=ApiClient.getAPIClient().create(ApiInterface.class);
+
+        Call<BaseDTO> call=apiInterface.postIssue(ApiClient.AUTH,token,issuePostDTOList);
+
+        call.enqueue(new Callback<BaseDTO>() {
+            @Override
+            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+
+
+                System.out.println("Response"+response.code());
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseDTO> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+
+
+   /* private void sendRedmineDetailsToServer() {
 
         //String token="Basic c3Jpbmk6U3JpbmlAMTIz";
         String token="b6e957bce7820f60453eb2403a67bd35b7a994de";
@@ -171,9 +216,9 @@ public class RedmineActivity extends AppCompatActivity {
 
         Call<BaseDTO> call=apiInterface.postIssue(ApiClient.AUTH,issuePostList);
 
-        /*Call<BaseDTO> call = SimplifiedRetrofit
+        *//*Call<BaseDTO> call = SimplifiedRetrofit
                 .getInstance()
-                .getApi().postIssue(token,issuePostList);*/
+                .getApi().postIssue(token,issuePostList);*//*
 
         call.enqueue(new Callback<BaseDTO>() {
             @Override
@@ -195,5 +240,5 @@ public class RedmineActivity extends AppCompatActivity {
         });
 
 
-    }
+    }*/
 }
