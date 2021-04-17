@@ -3,7 +3,6 @@ package com.sosaley.hatsun.retrofit;
 import com.sosaley.hatsun.model.BaseDTO;
 import com.sosaley.hatsun.model.GetUserDTO;
 import com.sosaley.hatsun.model.IssuePostDTO;
-import com.sosaley.hatsun.model.IssuePostList;
 import com.sosaley.hatsun.model.LoginDTO;
 import com.sosaley.hatsun.model.ResetPasswordDTO;
 import com.sosaley.hatsun.model.UserDTO;
@@ -59,9 +58,4 @@ public interface ApiInterface {
 
     @GET(AppConstant.LOCAL_SERVER+"current.json")
     Call<BaseDTO> getUserDetailsWithUserAndPass(@Header("Authorization") String auth);
-
-
-
-
-
 }

@@ -21,6 +21,9 @@ public class SimplifiedRetrofit {
     }*/
 
     String auth = "Basic " + Base64.encodeToString(("admin:admin@123").getBytes(), Base64.NO_WRAP);
+    /*String authToken = "Basic " + Base64.encodeToString(("srini:Srini@123").getBytes(), Base64.NO_WRAP);
+    String authenToken = "Basic " + Base64.encodeToString(("admin:Admin@123").getBytes(), Base64.NO_WRAP);*/
+
     //String auth = "password:'Srini@123', username:'srini'";
     //private static final String BASE_URL = "http://redmine.sosaley.co.in:83/";
     private static SimplifiedRetrofit mInstance;

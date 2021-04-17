@@ -19,7 +19,7 @@ public class ApiClient {
     @SuppressLint("NewApi")
 
     public static String AUTH = "Basic " + Base64.encodeToString(("admin:admin@123").getBytes(),Base64.NO_WRAP);
-    //public static String AUTH="Basic"+ Base64.getEncoder().encodeToString("srini:Srini@123").getBytes();
+    public static String SERVER_AUTH="Basic " + Base64.encodeToString(("srini:Srini@123").getBytes(),Base64.NO_WRAP);
 
     public static Retrofit retrofit = null;
     private static Gson gson = new GsonBuilder()

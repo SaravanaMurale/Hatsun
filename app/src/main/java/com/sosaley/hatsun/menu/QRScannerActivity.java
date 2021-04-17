@@ -33,10 +33,11 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
         String scannedResult = result.getText();
 
         //QRDisplayActivity.displayQR.setText(result.getText());
-        QRDisplayActivity.edit.setVisibility(View.INVISIBLE);
-        QRDisplayActivity.update.setVisibility(View.INVISIBLE);
-        QRDisplayActivity.sync.setVisibility(View.VISIBLE);
-        QRDisplayActivity.qrDisplayBlock.setVisibility(View.VISIBLE);
+
+        QRDisplayActivity.batteryNameTitle.setVisibility(View.VISIBLE);
+        QRDisplayActivity.descEdit.setVisibility(View.VISIBLE);
+        QRDisplayActivity.btnSubmit.setVisibility(View.VISIBLE);
+
 
         String[] words = scannedResult.split(":");
 
@@ -48,6 +49,8 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
             System.out.println("ArrayPosition1"+words[1]);
             System.out.println("ArrayPosition2"+words[2]);
             System.out.println("ArrayPosition2"+words[3]);
+
+            QRDisplayActivity.batteryNameTitle.setText(words[0]+":"+words[1]+":"+words[2]+":"+words[3]);
 
             Toast.makeText(QRScannerActivity.this,"ScanData"+ words[0]+" "+words[1]+" "+words[2]+" "+words[3],Toast.LENGTH_LONG).show();
 

@@ -13,41 +13,80 @@
         android:background="@color/hatsun_blue">
     </androidx.appcompat.widget.Toolbar>-->
 
-    <TextView
-        android:id="@+id/btnToolBar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/hatsun_blue" />
+    <Button
+        android:id="@+id/btnScanQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnToolBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/fifty_dp"
+        android:background="@drawable/background_shape"
+        android:text="Scan QR" />
 
     <ImageView
         android:id="@+id/menuIcon"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:src="@drawable/person_icon"
         android:layout_alignParentRight="true"
-        />
-
-    <Button
-        android:id="@+id/btnScanQR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/fifty_dp"
-        android:text="Scan QR"
-        android:layout_below="@id/btnToolBar"
-        android:background="@drawable/background_shape"
-        />
+        android:src="@drawable/person_icon" />
 
     <TextView
+        android:id="@+id/scanText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnScanQR"
-        android:layout_marginTop="@dimen/five_dp"
-        android:text="Click scanQR to scan QR code "
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/five_dp"
+        android:text="Click scanQR to scan QR code " />
+
+    <TextView
+        android:id="@+id/batteryNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Battery Name"
+        android:layout_below="@id/scanText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/thirty_dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/twenty_dp"
+        android:textColor="@color/hatsun_blue"
+        android:visibility="invisible"
         />
 
-    <RelativeLayout
+
+
+
+
+        <EditText
+            android:id="@+id/descriptionOfIssue"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hundren_dp"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/five_dp"
+            android:hint="Description"
+            android:visibility="invisible"
+            />
+
+
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descriptionOfIssue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/fifty_dp"
+        android:background="@drawable/background_shape"
+        android:text="@string/submit"
+        android:visibility="invisible"
+        />
+
+
+
+
+
+    <!--<RelativeLayout
         android:id="@+id/qrDisplayBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -311,97 +350,13 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <TextView
-        android:id="@+id/displayQR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnScanQR" />
-
-    <Button
-        android:id="@+id/edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/qrDisplayBlock"
-        android:layout_marginTop="@dimen/twenty_five_sp"
-        android:text="Edit"
-        android:background="@drawable/background_shape"
-        android:layout_marginLeft="@dimen/five_dp"
-        android:visibility="invisible"
-
-        />
-
-    <Button
-        android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/qrDisplayBlock"
-        android:layout_marginTop="@dimen/twenty_five_sp"
-        android:text="Update"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/background_shape"
-        android:visibility="invisible"
-
-        />
-
-    <Button
-        android:id="@+id/sync"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/qrDisplayBlock"
-        android:layout_marginTop="@dimen/twenty_five_sp"
-        android:text="Sync"
-        android:background="@drawable/background_shape"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/five_dp"
-        android:visibility="invisible"
-
-        />
-
-    <TextView
-        android:id="@+id/dataSync"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/data_success"
-        android:textColor="@color/green"
-        android:layout_below="@id/sync"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/thirty_dp"
-        android:visibility="invisible"
-        />
-
-    <EditText
-        android:id="@+id/descriptionOfIssue"
+        android:id="@+id/btnToolBar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:hint="Description"
-        android:layout_below="@+id/dataSync"
-        android:layout_marginTop="@dimen/five_dp"
-        />
-
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/submit"
-        android:layout_below="@+id/descriptionOfIssue"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/five_dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sosaley"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/black"
-        android:visibility="gone"
-
-        />
-
-
+        android:layout_height="50dp"
+        android:background="@color/hatsun_blue" />
 
 
 </RelativeLayout>

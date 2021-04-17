@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-       <!-- <activity android:name=".redmine.RedmineActivity"></activity>-->
+        <activity android:name=".redmine.PostIssueActivity"></activity>
+        <!-- <activity android:name=".redmine.RedmineActivity"></activity> -->
         <activity android:name=".menu.EditActivity" />
         <activity android:name=".menu.ProfileActivity" />
         <activity android:name=".authentication.ResetPasswordActivity" />
@@ -20,7 +21,7 @@
         <activity android:name=".menu.QRScannerActivity" />
         <activity android:name=".authentication.SignupActivity" />
         <activity android:name=".authentication.SigninActivity" />
-        <activity android:name=".redmine.RedmineActivity">
+        <activity android:name=".menu.QRDisplayActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,10 +29,10 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
 </manifest>
