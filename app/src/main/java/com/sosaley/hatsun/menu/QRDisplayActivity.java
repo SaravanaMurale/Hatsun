@@ -126,7 +126,17 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                         MediaType mediaType = MediaType.parse("application/json");
                         RequestBody body;
                         body = RequestBody.create(mediaType,
-                                "{\n  \"issue\": {\n    \"project_id\": 1,\n    \"subject\": \"BMS Support Project Iss\",\n    \"priority_id\": 4,\n    \"description\":\"Battery is not connected properly\",\n    \"is_private\":false,\n    \"estimated_hours\":\"8\"\n  }\n}");
+                                "{\n  " +
+                                        "\"issue\": " +
+                                        "{\n   " +
+                                        " \"project_id\": 1,\n  " +
+                                        "  \"subject\": \"BMS Support Project Iss\",\n  " +
+                                        "  \"priority_id\": 4,\n   " +
+                                        " \"description\":\"Battery is not connected properly\",\n" +
+                                        "    \"is_private\":false,\n  " +
+                                        "  \"estimated_hours\":\"8\"\n  " +
+                                        "}" +
+                                        "\n}");
 
 
                         Request request = new Request.Builder()
