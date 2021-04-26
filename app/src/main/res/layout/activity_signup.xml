@@ -12,13 +12,20 @@
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:src="@drawable/hatsun_agro_pro_logo"
+        android:layout_marginTop="@dimen/fifty_dp"
         android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:id="@+id/sigUpBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signupNameBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
         android:layout_marginLeft="@dimen/thirty_dp"
         android:layout_marginRight="@dimen/thirty_dp">
 
@@ -102,6 +109,8 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    </RelativeLayout>
+
 
     <Button
         android:id="@+id/signUpBtn"
@@ -110,14 +119,16 @@
         android:text="@string/signup"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_below="@id/signupPasswordBlock"
+        android:layout_below="@id/sigUpBlock"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/thirty_dp"
         android:background="@drawable/background_shape"
         />
 
 
-    <include layout="@layout/fragment_social_signup"/>
+    <include layout="@layout/fragment_social_signup"
+        android:visibility="invisible"
+        />
 
 
 
