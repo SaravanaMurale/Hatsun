@@ -61,8 +61,6 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         initView();
 
 
-
-
         btnScanQR.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -110,7 +108,134 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
     }
 
-    private void sendDescriptionDataToRedmine(String description) {
+    private void sendDescriptionDataToRedmine(String desc) {
+
+
+        int project_Id=1;
+        String subectContent="Subject Content";
+
+        Thread timer = new Thread() {
+            public void run() {
+                try {
+                    sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        OkHttpClient client = new OkHttpClient().newBuilder()
+                                .build();
+                        MediaType mediaType = MediaType.parse("application/json");
+                        RequestBody body;
+                        body = RequestBody.create(mediaType,
+                                "{\n" +
+                                        "\"issue\": " +
+                                        "{\n   " +
+                                        " \"project_id\": project_Id,\n  " +
+                                        "  \"subject\": \"BMS Support Project Iss\",\n  " +
+                                        "}" +
+                                        "\n}");
+
+
+
+                        Request request = new Request.Builder()
+                                .url("http://redmine.sosaley.co.in:83/issues.json")
+                                //.url("http://192.168.0.23:80/redmine/issues.json")
+                                .method("POST", body)
+                                .addHeader("Content-Type", "application/json")
+                                .addHeader("Authorization",ApiClient.SERVER_AUTH )
+                                .build();
+                        Response response = client.newCall(request).execute();
+
+                        descEdit.setText("");
+
+
+                        System.out.println("Response"+response.body().toString());
+
+                        Log.i(ContentValues.TAG, "response::"+response.body().string());
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        timer.start();
+
+        Toast.makeText(QRDisplayActivity.this,"Issue Posted Successfully",Toast.LENGTH_LONG).show();
+
+    }
+
+    private void editScannedDataWithServer() {
+
+        Intent intent=new Intent(QRDisplayActivity.this,EditActivity.class);
+
+        intent.putExtra("CLIENTNAME",client_Name);
+        intent.putExtra("PLANTNAME",plant_Name);
+        intent.putExtra("BATTERYID",battery_Id);
+        intent.putExtra("BATTERYROOM",battety_Room_No);
+        intent.putExtra("UPS",ups_No);
+        intent.putExtra("RACKNO",rack_No);
+        intent.putExtra("SLAVENO",slave_No);
+        intent.putExtra("SLAVETYPE",slave_Type);
+
+        startActivity(intent);
+
+    }
+
+    private void stopBlinking() {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                MathUtil.syncStatusBlinkStop(QRDisplayActivity.this,dataSync);
+            }
+        },5000);
+
+
+    }
+
+    private void callActivity() {
+
+        Intent intent = new Intent(QRDisplayActivity.this, QRScannerActivity.class);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.item1:
+                Toast.makeText(QRDisplayActivity.this, "Profile", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(QRDisplayActivity.this,ProfileActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.item2:
+                PreferencesUtil.clearAll(QRDisplayActivity.this);
+                Intent signin=new Intent(QRDisplayActivity.this, SigninActivity.class);
+                startActivity(signin);
+                finish();
+                //Toast.makeText(QRDisplayActivity.this, "Logout", Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                return false;
+       }
+    }
+
+    private void initView() {
+        btnScanQR = (Button) findViewById(R.id.btnScanQR);
+
+        menuIcon = (ImageView) findViewById(R.id.menuIcon);
+        batteryNameTitle=(TextView)findViewById(R.id.batteryNameTitle);
+        btnSubmit=(Button)findViewById(R.id.btnSubmit);
+        descEdit=(EditText)findViewById(R.id.descriptionOfIssue);
+
+    }
+
+
+
+    /*private void sendDescriptionDataToRedmine(String description) {
 
 
         Thread timer = new Thread() {
@@ -165,180 +290,8 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
         Toast.makeText(QRDisplayActivity.this,"Issue Posted Successfully",Toast.LENGTH_LONG).show();
 
-    }
-
-    /*private void sendSimplifiedRequest(String description) {
-
-        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,8);
-
-        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
-        issuePostDTOList.add(issuePostDTO);
-
-        IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
-
-        Call<BaseDTO> call = SimplifiedRetrofit
-                .getInstance()
-                .getApi().postIssue(issuePostList);
-
-        call.enqueue(new Callback<BaseDTO>() {
-            @Override
-            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
-
-                System.out.println("ResponseSuccess"+response.code());
-                System.out.println("ResponseMessage"+response.message().toString());
-                System.out.println("ResponseErrorBody"+response.errorBody().toString());
-
-
-            }
-
-            @Override
-            public void onFailure(Call<BaseDTO> call, Throwable t) {
-
-            }
-        });
-
-
     }*/
 
-
-   /* private void sendDescriptionToServer(String description) {
-        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
-
-        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,8);
-
-        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
-        issuePostDTOList.add(issuePostDTO);
-
-        IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
-
-
-
-        //String token="Basic c3Jpbmk6U3JpbmlAMTIz";
-        String token="Basic 008111fded86fc249e6e2cbfc5aecb9960d85ef3";
-        String userName="srini";
-        String password="Srini@123";
-
-       // String authToken="Basic "+ Base64.encodeToString(userName:password);
-
-        *//*Call<BaseDTO> call=apiInterface.postIssue(issuePostList);
-        call.enqueue(new Callback<BaseDTO>() {
-            @Override
-            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
-
-
-                System.out.println("ResponseSuccess"+response.code());
-                System.out.println("ResponseMessage"+response.message().toString());
-                System.out.println("ResponseErrorBody"+response.errorBody().toString());
-
-            }
-
-            @Override
-            public void onFailure(Call<BaseDTO> call, Throwable t) {
-
-                System.out.println("Exception"+t.getMessage().toString());
-
-            }
-        });*//*
-
-
-
-
-
-
-    }*/
-
-
-    /*private void syncScannedDataWithServer() {
-
-        edit.setVisibility(View.VISIBLE);
-
-        client_Name=clientName.getText().toString().trim();
-        plant_Name=plantName.getText().toString().trim();
-        battery_Id=batteryId.getText().toString().trim();
-        battety_Room_No= batteryRoomNo.getText().toString().trim();
-        ups_No=upsNo.getText().toString().trim();
-        rack_No=rackNo.getText().toString().trim();
-        slave_No=slaveNo.getText().toString().trim();
-        slave_Type=slaveType.getText().toString().trim();
-
-        //System.out.println("ClientNameInQRDisplay"+client_Name+" "+plant_Name+" "+battery_Id+" "+battety_Room_No+" "+ups_No+" "+rack_No+" "+slave_No+" "+slave_Type);
-
-        sendDataToServerToSync(client_Name,plant_Name,battery_Id,battety_Room_No,ups_No,rack_No,slave_No,slave_Type);
-    }*/
-
-
-
-
-
-    private void editScannedDataWithServer() {
-
-        Intent intent=new Intent(QRDisplayActivity.this,EditActivity.class);
-
-        intent.putExtra("CLIENTNAME",client_Name);
-        intent.putExtra("PLANTNAME",plant_Name);
-        intent.putExtra("BATTERYID",battery_Id);
-        intent.putExtra("BATTERYROOM",battety_Room_No);
-        intent.putExtra("UPS",ups_No);
-        intent.putExtra("RACKNO",rack_No);
-        intent.putExtra("SLAVENO",slave_No);
-        intent.putExtra("SLAVETYPE",slave_Type);
-
-        startActivity(intent);
-
-    }
-
-    private void stopBlinking() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                MathUtil.syncStatusBlinkStop(QRDisplayActivity.this,dataSync);
-            }
-        },5000);
-
-
-    }
-
-
-
-    private void callActivity() {
-
-        Intent intent = new Intent(QRDisplayActivity.this, QRScannerActivity.class);
-        startActivity(intent);
-
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.item1:
-                Toast.makeText(QRDisplayActivity.this, "Profile", Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(QRDisplayActivity.this,ProfileActivity.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.item2:
-                PreferencesUtil.clearAll(QRDisplayActivity.this);
-                Intent signin=new Intent(QRDisplayActivity.this, SigninActivity.class);
-                startActivity(signin);
-                finish();
-                //Toast.makeText(QRDisplayActivity.this, "Logout", Toast.LENGTH_LONG).show();
-                return true;
-
-            default:
-                return false;
-       }
-    }
-
-    private void initView() {
-        btnScanQR = (Button) findViewById(R.id.btnScanQR);
-
-        menuIcon = (ImageView) findViewById(R.id.menuIcon);
-        batteryNameTitle=(TextView)findViewById(R.id.batteryNameTitle);
-        btnSubmit=(Button)findViewById(R.id.btnSubmit);
-        descEdit=(EditText)findViewById(R.id.descriptionOfIssue);
-
-    }
 
     /*private void sendDataToServerToSync(String client_name, String plant_name, String battery_id, String battety_room_no, String ups_no, String rack_no, String slave_no, String slave_type) {
 
@@ -439,4 +392,104 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
 
     }*/
+
+     /*private void sendSimplifiedRequest(String description) {
+
+        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,8);
+
+        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
+        issuePostDTOList.add(issuePostDTO);
+
+        IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
+
+        Call<BaseDTO> call = SimplifiedRetrofit
+                .getInstance()
+                .getApi().postIssue(issuePostList);
+
+        call.enqueue(new Callback<BaseDTO>() {
+            @Override
+            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+
+                System.out.println("ResponseSuccess"+response.code());
+                System.out.println("ResponseMessage"+response.message().toString());
+                System.out.println("ResponseErrorBody"+response.errorBody().toString());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseDTO> call, Throwable t) {
+
+            }
+        });
+
+
+    }*/
+
+
+   /* private void sendDescriptionToServer(String description) {
+        ApiInterface apiInterface = ApiClient.getAPIClient().create(ApiInterface.class);
+
+        IssuePostDTO issuePostDTO=new IssuePostDTO(1,"Subject From App",4,"Desc From App",false,8);
+
+        List<IssuePostDTO> issuePostDTOList=new ArrayList<>();
+        issuePostDTOList.add(issuePostDTO);
+
+        IssuePostList issuePostList=new IssuePostList(issuePostDTOList);
+
+
+
+        //String token="Basic c3Jpbmk6U3JpbmlAMTIz";
+        String token="Basic 008111fded86fc249e6e2cbfc5aecb9960d85ef3";
+        String userName="srini";
+        String password="Srini@123";
+
+       // String authToken="Basic "+ Base64.encodeToString(userName:password);
+
+        *//*Call<BaseDTO> call=apiInterface.postIssue(issuePostList);
+        call.enqueue(new Callback<BaseDTO>() {
+            @Override
+            public void onResponse(Call<BaseDTO> call, Response<BaseDTO> response) {
+
+
+                System.out.println("ResponseSuccess"+response.code());
+                System.out.println("ResponseMessage"+response.message().toString());
+                System.out.println("ResponseErrorBody"+response.errorBody().toString());
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseDTO> call, Throwable t) {
+
+                System.out.println("Exception"+t.getMessage().toString());
+
+            }
+        });*//*
+
+
+
+
+
+
+    }*/
+
+
+    /*private void syncScannedDataWithServer() {
+
+        edit.setVisibility(View.VISIBLE);
+
+        client_Name=clientName.getText().toString().trim();
+        plant_Name=plantName.getText().toString().trim();
+        battery_Id=batteryId.getText().toString().trim();
+        battety_Room_No= batteryRoomNo.getText().toString().trim();
+        ups_No=upsNo.getText().toString().trim();
+        rack_No=rackNo.getText().toString().trim();
+        slave_No=slaveNo.getText().toString().trim();
+        slave_Type=slaveType.getText().toString().trim();
+
+        //System.out.println("ClientNameInQRDisplay"+client_Name+" "+plant_Name+" "+battery_Id+" "+battety_Room_No+" "+ups_No+" "+rack_No+" "+slave_No+" "+slave_Type);
+
+        sendDataToServerToSync(client_Name,plant_Name,battery_Id,battety_Room_No,ups_No,rack_No,slave_No,slave_Type);
+    }*/
+
 }

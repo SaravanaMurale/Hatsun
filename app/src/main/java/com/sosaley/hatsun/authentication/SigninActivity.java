@@ -55,7 +55,11 @@ public class SigninActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                doLoginUser(loginMobileEditText.getText().toString(),loginPasswordEditText.getText().toString());
+                //doLoginUser(loginMobileEditText.getText().toString(),loginPasswordEditText.getText().toString());
+
+                doOfflineLogin();
+
+
 
 
             }
@@ -74,6 +78,13 @@ public class SigninActivity extends AppCompatActivity {
                 launchForgetPasswordDialog();
             }
         });
+
+    }
+
+    private void doOfflineLogin() {
+
+        PreferencesUtil.setValueSInt(SigninActivity.this,PreferencesUtil.ASSIGN_PROJECT,1);
+        launchHomeActivity();
 
     }
 
