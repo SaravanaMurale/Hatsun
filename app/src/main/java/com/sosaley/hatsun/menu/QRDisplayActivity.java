@@ -115,6 +115,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
         String subject="Project 1 post";
         int priority_id=4;
         int estimate_hours=8;
+        boolean isPrivate=false;
 
         Thread timer = new Thread() {
             public void run() {
@@ -141,7 +142,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                                         "\n}");
 
                          body = RequestBody.create(mediaType,
-                                "{\n  \"issue\": {\n    \"project_id\": 1,\n    \"subject\": \"Project 1 post\",\n    \"priority_id\": 4,\n    \"description\":\"desc\",\n    \"is_private\":false,\n    \"estimated_hours\":\"8\" \n  }\n}");
+                                "{\n  \"issue\": {\n    \"project_id\":"+project_Id+",\n    \"subject\": "+subject+",\n    \"priority_id\": "+priority_id+",\n    \"description\":"+description+",\n    \"is_private\":"+isPrivate+",\n    \"estimated_hours\":\"8\" \n  }\n}");
 
 
 
