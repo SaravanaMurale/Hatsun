@@ -129,7 +129,7 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                                 .build();
                         MediaType mediaType = MediaType.parse("application/json");
                         RequestBody body;
-                        body = RequestBody.create(mediaType,
+                        /*body = RequestBody.create(mediaType,
                                 "{\n" +
                                         "\"issue\": " +
                                         "{\n   " +
@@ -139,10 +139,10 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                                         "  \"description\":"  +description+",\n " +
 
                                         "}" +
-                                        "\n}");
+                                        "\n}");*/
 
                          body = RequestBody.create(mediaType,
-                                "{\n  \"issue\": {\n    \"project_id\":"+project_Id+",\n    \"subject\": "+subject+",\n    \"priority_id\": "+priority_id+",\n    \"description\":"+description+",\n    \"is_private\":"+isPrivate+",\n    \"estimated_hours\":\"8\" \n  }\n}");
+                                "{\n  \"issue\": {\n    \"project_id\":"+project_Id+",\n    \"subject\": "+subject+",\n    \"priority_id\": "+priority_id+",\n    \"description\":"+description+",\n    \"is_private\":"+isPrivate+",\n    \"estimated_hours\":"+estimate_hours+" \n  }\n}");
 
 
 
