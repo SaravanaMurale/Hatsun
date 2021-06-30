@@ -147,8 +147,8 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
 
                         Request request = new Request.Builder()
-                               // .url("http://redmine.sosaley.co.in:83/issues.json")
-                                .url("http://192.168.0.23:80/redmine/issues.json")
+                                .url("http://redmine.sosaley.co.in:83/issues.json")
+                               // .url("http://192.168.0.23:80/redmine/issues.json")
                                 .method("POST", body)
                                 .addHeader("Content-Type", "application/json")
                                 .addHeader("Authorization",ApiClient.SERVER_AUTH )
