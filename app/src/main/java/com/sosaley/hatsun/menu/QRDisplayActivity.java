@@ -110,9 +110,11 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
 
     private void sendDescriptionDataToRedmine(String desc) {
 
-
         int project_Id=1;
-        String subectContent="Subject Content";
+        String description=desc;
+        String subject="Project 1 post";
+        int priority_id=4;
+        int estimate_hours=8;
 
         Thread timer = new Thread() {
             public void run() {
@@ -130,16 +132,22 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                                 "{\n" +
                                         "\"issue\": " +
                                         "{\n   " +
-                                        " \"project_id\": project_Id,\n  " +
-                                        "  \"subject\": \"BMS Support Project Iss\",\n  " +
+                                        " \"project_id\":"  +project_Id+",\n  " +
+                                        "  \"subject\":"  +subject+",\n " +
+                                        "  \"priority_id\":"  +priority_id+",\n " +
+                                        "  \"description\":"  +description+",\n " +
+
                                         "}" +
                                         "\n}");
+
+                         body = RequestBody.create(mediaType,
+                                "{\n  \"issue\": {\n    \"project_id\": 1,\n    \"subject\": \"Project 1 post\",\n    \"priority_id\": 4,\n    \"description\":\"desc\",\n    \"is_private\":false,\n    \"estimated_hours\":\"8\" \n  }\n}");
 
 
 
                         Request request = new Request.Builder()
-                                .url("http://redmine.sosaley.co.in:83/issues.json")
-                                //.url("http://192.168.0.23:80/redmine/issues.json")
+                               // .url("http://redmine.sosaley.co.in:83/issues.json")
+                                .url("http://192.168.0.23:80/redmine/issues.json")
                                 .method("POST", body)
                                 .addHeader("Content-Type", "application/json")
                                 .addHeader("Authorization",ApiClient.SERVER_AUTH )
@@ -147,7 +155,6 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                         Response response = client.newCall(request).execute();
 
                         descEdit.setText("");
-
 
                         System.out.println("Response"+response.body().toString());
 
