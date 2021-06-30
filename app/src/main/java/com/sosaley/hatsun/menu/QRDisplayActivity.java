@@ -145,7 +145,6 @@ public class QRDisplayActivity extends AppCompatActivity implements PopupMenu.On
                                 "{\n  \"issue\": {\n    \"project_id\":"+project_Id+",\n    \"subject\": "+subject+",\n    \"priority_id\": "+priority_id+",\n    \"description\":"+description+",\n    \"is_private\":"+isPrivate+",\n    \"estimated_hours\":"+estimate_hours+" \n  }\n}");
 
 
-
                         Request request = new Request.Builder()
                                 .url("http://redmine.sosaley.co.in:83/issues.json")
                                // .url("http://192.168.0.23:80/redmine/issues.json")
