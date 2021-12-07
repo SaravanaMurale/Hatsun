@@ -1,6 +1,8 @@
 package com.sosaley.hatsun.redmine;
 
+import android.content.ContentValues;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,20 +17,25 @@ import com.sosaley.hatsun.model.IssuePostList;
 import com.sosaley.hatsun.retrofit.ApiClient;
 import com.sosaley.hatsun.retrofit.ApiInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
+//import retrofit2.Response;
 
-/*import okhttp3.MediaType;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import retrofit2.Call;
-import retrofit2.Callback;*/
+import retrofit2.Callback;
 
 
 public class RedmineActivity extends AppCompatActivity {
@@ -66,7 +73,7 @@ public class RedmineActivity extends AppCompatActivity {
 
                 //sendRedmineIssueDetailsOKHTTP();
 
-                sendRedmineDetailstoServerForRetrofitAPI();
+                //sendRedmineDetailstoServerForRetrofitAPI();
 
 
 
@@ -75,7 +82,7 @@ public class RedmineActivity extends AppCompatActivity {
 
     }
 
-   /* private void sendRedmineIssueDetailsOKHTTP() {
+    private void sendRedmineIssueDetailsOKHTTP() {
 
 
         Thread timer = new Thread() {
@@ -92,8 +99,8 @@ public class RedmineActivity extends AppCompatActivity {
                         RequestBody body = RequestBody.create(mediaType,
                                 "{\n  \"issue\": {\n    \"project_id\": 1,\n    \"subject\": \"Project 1 post\",\n    \"priority_id\": 4,\n    \"description\":\"Description\",\n    \"is_private\":false,\n    \"estimated_hours\":\"8\"\n  }\n}");
                         Request request = new Request.Builder()
-                               // .url("http://redmine.sosaley.co.in:83/issues.json")
-                                .url("http://192.168.0.23:80/redmine/issues.json")
+                                .url("http://redmine.sosaley.co.in:83/issues.json")
+                               // .url("http://192.168.0.23:80/redmine/issues.json")
                                 .method("POST", body)
                                 .addHeader("Content-Type", "application/json")
                                 .addHeader("Authorization",ApiClient.AUTH )
@@ -113,7 +120,7 @@ public class RedmineActivity extends AppCompatActivity {
         timer.start();
 
 
-    }*/
+    }
 
 //    private void getUserDetailsWithoutUserNameAndPass() {
 //
@@ -166,7 +173,7 @@ public class RedmineActivity extends AppCompatActivity {
 //    }
 
 
-    void sendRedmineDetailstoServerForRetrofitAPI(){
+  /*  void sendRedmineDetailstoServerForRetrofitAPI(){
 
         String token="b6e957bce7820f60453eb2403a67bd35b7a994de";
 
@@ -178,7 +185,7 @@ public class RedmineActivity extends AppCompatActivity {
 
         ApiInterface apiInterface=ApiClient.getAPIClient().create(ApiInterface.class);
 
-        Call<BaseDTO> call=apiInterface.postIssue(ApiClient.AUTH,token,issuePostDTOList);
+        Call<BaseDTO> call=apiInterface.postIssue(ApiClient.SERVER_AUTH,token,issuePostDTOList);
 
         call.enqueue(new Callback<BaseDTO>() {
             @Override
@@ -196,7 +203,7 @@ public class RedmineActivity extends AppCompatActivity {
         });
 
 
-    }
+    }*/
 
 
 

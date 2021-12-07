@@ -53,7 +53,6 @@ public class PreferencesUtil {
         editor.remove(key);
         editor.commit();
 
-
     }
 
     public static void clearAll(Context context) {
